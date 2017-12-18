@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,8 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import static javax.swing.UIManager.get;
-import static javax.swing.UIManager.get;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -46,7 +45,7 @@ public class JLogin extends JFrame implements ActionListener
     private JTable table;
 
     public JLogin()
-    {   
+    {
         
         super("Formulario de Inicio de Sesión");
        
@@ -269,10 +268,8 @@ public class JLogin extends JFrame implements ActionListener
         buttonPanel.add(editarUsuario);
         buttonPanel.add(agregarUsuario);
 
-        Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
-        { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
-        Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
-        table = new JTable(rowData, columnNames);
+        DefaultTableModel model = new DefaultTableModel();
+        table = new JTable(model);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
         public void valueChanged(ListSelectionEvent event) {
@@ -381,6 +378,9 @@ public class JLogin extends JFrame implements ActionListener
         
         return (frame);
     }
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> af250021343619bdee7cd41f259629adcc7f9c33
 }
