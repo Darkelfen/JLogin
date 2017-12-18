@@ -19,7 +19,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class JLogin extends JFrame implements ActionListener
 {
@@ -37,7 +41,7 @@ public class JLogin extends JFrame implements ActionListener
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
-    private JTable jTable1;
+    private JTable table;
 
     public JLogin()
     {
@@ -167,6 +171,13 @@ public class JLogin extends JFrame implements ActionListener
 
         }
         
+        if (e.getSource() == this.eliminarUsuario)
+        {
+           // this.table.getModel()).removeRow(this.table.getRowSelected());
+        }
+        
+        /* if (e.getSource() == )*/
+        
     }
 
     JFrame openWindow()
@@ -184,9 +195,22 @@ public class JLogin extends JFrame implements ActionListener
         this.agregarUsuario = new JButton("Agregar");
         
         cerrarSesion.addActionListener(this);
+        cerrarSesion.setBackground(Color.RED);
+        cerrarSesion.setForeground(Color.WHITE);
+        
         eliminarUsuario.addActionListener(this);
+        eliminarUsuario.setBackground(Color.GRAY);
+        eliminarUsuario.setForeground(Color.WHITE);
+        eliminarUsuario.setEnabled(false);
+        
         editarUsuario.addActionListener(this);
+        editarUsuario.setBackground(Color.GRAY);
+        editarUsuario.setForeground(Color.WHITE);
+        editarUsuario.setEnabled(false);
+        
         agregarUsuario.addActionListener(this);       
+        agregarUsuario.setBackground(Color.BLUE);
+        agregarUsuario.setForeground(Color.WHITE);    
         
         this.barraMenu.add(this.menuArchivo);
             this.menuArchivo.add(this.infoUsuario);
@@ -222,7 +246,24 @@ public class JLogin extends JFrame implements ActionListener
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
-        JTable table = new JTable(rowData, columnNames);
+        table = new JTable(rowData, columnNames);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            // do some actions here, for example
+            // print first column value from selected row}
+            if (table.getSelectedRow() > -1)
+            {
+                editarUsuario.setEnabled(true);
+                eliminarUsuario.setEnabled(true);
+            }
+            else
+            {
+                editarUsuario.setEnabled(true);
+                eliminarUsuario.setEnabled(true);
+            }
+        }
+        });
 
         JScrollPane scrollPane = new JScrollPane(table);
         frame.add(scrollPane, BorderLayout.CENTER);
