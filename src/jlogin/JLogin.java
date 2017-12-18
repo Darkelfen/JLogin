@@ -206,7 +206,7 @@ public class JLogin extends JFrame implements ActionListener
         frame.setSize(900, 600);
         JLabel banner = new JLabel(image);
         JPanel upperPanel = new JPanel ();
-        upperPanel.setLayout(new GridLayout(2, 1, 10, 10));
+        upperPanel.setLayout(new GridLayout(2, 1, 5, 5));
         upperPanel.add(barraMenu);
         upperPanel.add(banner);
 
@@ -286,7 +286,7 @@ public class JLogin extends JFrame implements ActionListener
         JPanel PanelBanner = new JPanel();
         //this.cerrarSesion = new JButton("Cerrar sesión");
         //cerrarSesion.addActionListener(this);
-        frame.add(PanelBanner);
+        frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
         JPanel formulario = new JPanel();
