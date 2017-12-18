@@ -36,6 +36,7 @@ public class JLogin extends JFrame implements ActionListener
     private JButton editarUsuario;
     private JButton agregarUsuario;
     private JButton Add;
+    private JButton cambiarContraseña;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
     
@@ -44,7 +45,9 @@ public class JLogin extends JFrame implements ActionListener
     private JTextField textfieldEmail;
     private JPasswordField textfieldPass;
     
-    
+    //CAMBIAR PASS
+     private JPasswordField textfieldPass1;
+     private JPasswordField textfieldPass2;
     private JLabel errorMsgU;
     private JLabel errorMsgP;
     private JFrame window;
@@ -203,6 +206,10 @@ public class JLogin extends JFrame implements ActionListener
         {
            // this.table.getModel()).removeRow(this.table.getRowSelected());
         }
+        if (e.getSource() == this.cambiarContraseña)
+        {
+          
+        }
         
         
     }
@@ -320,7 +327,9 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener infoUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                //
+                window.dispose();
+                JFrame memi = MostrarInfo();
+                memi.setVisible(true);
             }
         };
         this.infoUsuario.addActionListener(infoUsuario);
@@ -328,10 +337,22 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener cambiarPass = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                //
+                window.dispose();
+                JFrame momi = CambiarPass();
+                momi.setVisible(true);
             }
         };
         this.cambiarPass.addActionListener(cambiarPass);
+        
+        ActionListener editarUsuario = new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                window.dispose();
+                JFrame memu = EditUser();
+                memu.setVisible(true);
+            }
+        };
+        this.editarUsuario.addActionListener(editarUsuario);
         
         ActionListener salir = new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -447,7 +468,7 @@ public class JLogin extends JFrame implements ActionListener
         JLabel labelPass = new JLabel("Contraseña");
         labelPass.setPreferredSize(new Dimension(100, 2));
         this.textfieldPass = new JPasswordField();
-        textfieldPass.setPreferredSize(new Dimension(100, 2));
+        textfieldPass.setPreferredSize(new Dimension(400, 2));
         Pass.add(labelPass, BorderLayout.LINE_START);
         Pass.add(textfieldPass, BorderLayout.CENTER);
         
@@ -462,11 +483,142 @@ public class JLogin extends JFrame implements ActionListener
         formulario.add(Nombre);
         formulario.add(email);
         formulario.add(Pass);
-        frame.add(Add,BorderLayout.SOUTH);
+        formulario.add(Add,BorderLayout.SOUTH);
         
-        frame.add(formulario,BorderLayout.CENTER);
+        JPanel centro = new JPanel();
+        centro.setBorder(new EmptyBorder(20, 20, 20, 20));
+        centro.add(formulario);
+        
+        frame.add(centro);
         
          return frame;
+     }
+     
+     JFrame MostrarInfo()
+     {
+        ImageIcon image = new ImageIcon("banner.png");
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(900, 600);
+        frame.setMinimumSize(new Dimension(900, 400));
+        JPanel PanelBanner = new JPanel();
+        JLabel banner = new JLabel(image);
+        PanelBanner.add(banner);
+        PanelBanner.setBackground(new Color(190, 11, 103));
+        frame.add(PanelBanner,BorderLayout.PAGE_START);
+        
+        JPanel User = new JPanel(new BorderLayout());
+        JLabel labelUser = new JLabel("Nombre de usuario");
+        
+        labelUser.setPreferredSize(new Dimension(120, 24));
+        
+        User.add(labelUser, BorderLayout.LINE_START);
+       
+        
+        
+        JPanel Nombre = new JPanel(new BorderLayout());
+        JLabel labelNombre = new JLabel("Nombre Real");
+        
+        labelNombre.setPreferredSize(new Dimension(120, 24));
+        
+        Nombre.add(labelNombre, BorderLayout.LINE_START);
+        
+        
+        JPanel email = new JPanel(new BorderLayout());
+        JLabel labelEmail = new JLabel("Email");
+        
+        labelEmail.setPreferredSize(new Dimension(120, 10));
+        
+        email.add(labelEmail, BorderLayout.LINE_START);
+       
+        
+        JPanel Pass = new JPanel(new BorderLayout());
+        JLabel labelPass = new JLabel("Contraseña");
+        labelPass.setPreferredSize(new Dimension(100, 2));
+        
+        Pass.add(labelPass, BorderLayout.LINE_START);
+        
+        
+       
+        
+        JPanel formulario = new JPanel();
+        formulario.setLayout(new GridLayout(4, 1, 10, 10));
+        formulario.add(User);
+        formulario.add(Nombre);
+        formulario.add(email);
+        formulario.add(Pass);
+        
+        JPanel centro = new JPanel();
+        centro.setBorder(new EmptyBorder(20, 20, 20, 20));
+        centro.add(formulario);
+        
+        frame.add(centro);
+        
+        return frame;
+     }
+     JFrame CambiarPass()
+     {
+         ImageIcon image = new ImageIcon("banner.png");
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(900, 600);
+        frame.setMinimumSize(new Dimension(900, 400));
+        JPanel PanelBanner = new JPanel();
+        JLabel banner = new JLabel(image);
+        PanelBanner.add(banner);
+        PanelBanner.setBackground(new Color(190, 11, 103));
+        frame.add(PanelBanner,BorderLayout.PAGE_START);
+        
+        
+        JPanel primeraFila = new JPanel(new BorderLayout());
+        JLabel labelContrasena1 = new JLabel("Ingrese Contraseña Antigua");
+        labelContrasena1.setPreferredSize(new Dimension(200, 24));
+        this.textfieldPass1 = new JPasswordField();
+        textfieldPass1.setPreferredSize(new Dimension(100, 24));
+        primeraFila.add(labelContrasena1,BorderLayout.LINE_START);
+        primeraFila.add(textfieldPass1, BorderLayout.AFTER_LINE_ENDS);
+        
+        
+
+        JPanel segundaFila = new JPanel(new BorderLayout());
+        JLabel labelContrasena2 = new JLabel("Ingrese Contraseña Nueva");
+        labelContrasena2.setPreferredSize(new Dimension(200, 24));
+        this.textfieldPass2 = new JPasswordField();
+        textfieldPass2.setPreferredSize(new Dimension(100, 24));
+        segundaFila.add(labelContrasena2, BorderLayout.LINE_START);
+        segundaFila.add(textfieldPass2, BorderLayout.CENTER);
+        
+        JButton cambiarContraseña = new JButton("Cambiar Contraseña");
+        cambiarContraseña.addActionListener(this);
+        cambiarContraseña.setBackground(Color.BLUE);
+        cambiarContraseña.setForeground(Color.WHITE);
+        
+        JPanel formulario = new JPanel();
+        formulario.setLayout(new GridLayout(3, 1, 10, 10));
+        formulario.add(primeraFila);
+        formulario.add(segundaFila);
+        formulario.add(cambiarContraseña);
+        JPanel centro = new JPanel();
+        centro.setBorder(new EmptyBorder(20, 20, 20, 20));
+        centro.add(formulario);
+        
+        frame.add(centro);
+        
+        return frame;
+     }
+     JFrame EditUser()
+     {
+        ImageIcon image = new ImageIcon("banner.png");
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(900, 600);
+        frame.setMinimumSize(new Dimension(900, 400));
+        JPanel PanelBanner = new JPanel();
+        JLabel banner = new JLabel(image);
+        PanelBanner.add(banner);
+        PanelBanner.setBackground(new Color(190, 11, 103));
+        frame.add(PanelBanner,BorderLayout.PAGE_START);
+        return frame;
      }
     public ArrayList<Usuario> loadUsuarios ()
     {
