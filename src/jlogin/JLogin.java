@@ -255,12 +255,15 @@ public class JLogin extends JFrame implements ActionListener
         frame.setSize(900, 600);
         JLabel banner = new JLabel(image);
         JPanel upperPanel = new JPanel ();
-        upperPanel.setLayout(new GridLayout(2, 1, 5, 5));
-        upperPanel.add(barraMenu);
-        upperPanel.add(banner);
-
-        frame.add(upperPanel, BorderLayout.NORTH);
-        
+        JPanel upperPanel2 = new JPanel ();
+        JPanel upperPanel3 = new JPanel ();
+        upperPanel.setLayout(new GridLayout(2, 1, 0, 0));
+        upperPanel2.add(barraMenu,BorderLayout.PAGE_START);
+        upperPanel3.add(banner);
+        upperPanel.add(upperPanel2,BorderLayout.PAGE_START);
+        upperPanel.add(upperPanel3);
+        frame.add(upperPanel,BorderLayout.NORTH);
+        upperPanel3.setBackground( new Color(190, 11, 103) );
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 4, 10, 10));
         buttonPanel.add(cerrarSesion);
