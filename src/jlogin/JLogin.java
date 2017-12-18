@@ -24,6 +24,8 @@ import javax.swing.ListSelectionModel;
 import static javax.swing.UIManager.get;
 import static javax.swing.UIManager.get;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -200,6 +202,7 @@ public class JLogin extends JFrame implements ActionListener
         
         if( e.getSource() == this.agregarUsuario2)
         {
+                saveUsuarios();
                 addUserWindow.dispose();
                 JFrame meme = openWindow();
                 meme.setVisible(true);
@@ -214,7 +217,6 @@ public class JLogin extends JFrame implements ActionListener
         {
           
         }
-        
         
     }
 
@@ -428,7 +430,7 @@ public class JLogin extends JFrame implements ActionListener
     }
      JFrame AddUser()
      {
-         ImageIcon image = new ImageIcon("banner.png");
+        ImageIcon image = new ImageIcon("banner.png");
          
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -442,40 +444,100 @@ public class JLogin extends JFrame implements ActionListener
         
         JPanel User = new JPanel(new BorderLayout());
         JLabel labelUser = new JLabel("Nombre de usuario");
-        
         labelUser.setPreferredSize(new Dimension(120, 24));
         this.textfieldUser = new JTextField();
         textfieldUser.setPreferredSize(new Dimension(100, 24));
         User.add(labelUser, BorderLayout.LINE_START);
         User.add(textfieldUser, BorderLayout.CENTER);
-        
-        
+        textfieldUser.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields();
+          }
+        });
+
         JPanel Nombre = new JPanel(new BorderLayout());
         JLabel labelNombre = new JLabel("Nombre Real");
-        
         labelNombre.setPreferredSize(new Dimension(120, 24));
         this.textfieldNombreReal = new JTextField();
         textfieldNombreReal.setPreferredSize(new Dimension(100, 24));
         Nombre.add(labelNombre, BorderLayout.LINE_START);
         Nombre.add(textfieldNombreReal, BorderLayout.CENTER);
+        textfieldNombreReal.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields();
+          }
+        });
         
         JPanel email = new JPanel(new BorderLayout());
         JLabel labelEmail = new JLabel("Email");
-        
         labelEmail.setPreferredSize(new Dimension(120, 10));
         this.textfieldEmail = new JTextField();
         textfieldEmail.setPreferredSize(new Dimension(100, 2));
         email.add(labelEmail, BorderLayout.LINE_START);
         email.add(textfieldEmail, BorderLayout.CENTER);
-        
+        textfieldEmail.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields();
+          }
+        });
+
         JPanel Pass = new JPanel(new BorderLayout());
         JLabel labelPass = new JLabel("Contraseña");
         labelPass.setPreferredSize(new Dimension(100, 2));
         this.textfieldPass = new JPasswordField();
         textfieldPass.setPreferredSize(new Dimension(400, 2));
         Pass.add(labelPass, BorderLayout.LINE_START);
-        Pass.add(textfieldPass, BorderLayout.CENTER);
-        
+        Pass.add(textfieldPass, BorderLayout.CENTER);        
+        textfieldPass.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields();
+          }
+        });
+
         this.agregarUsuario2 = new JButton("Agregar");
         agregarUsuario2.addActionListener(this);
         agregarUsuario2.setBackground(Color.BLUE);
@@ -495,8 +557,8 @@ public class JLogin extends JFrame implements ActionListener
         centro.add(formulario);
         
         frame.add(centro);
-        
-         return frame;
+                 
+        return frame;
      }
      
      JFrame MostrarInfo()
@@ -518,8 +580,6 @@ public class JLogin extends JFrame implements ActionListener
         labelUser.setPreferredSize(new Dimension(120, 24));
         
         User.add(labelUser, BorderLayout.LINE_START);
-       
-        
         
         JPanel Nombre = new JPanel(new BorderLayout());
         JLabel labelNombre = new JLabel("Nombre Real");
@@ -649,6 +709,20 @@ public class JLogin extends JFrame implements ActionListener
     public Usuario removeU(int index) {
         return usuarios.remove(index);
     }
-    
-    
+
+    public void checkFields()
+    {
+        String user = textfieldUser.getText();
+        String nombre = textfieldNombreReal.getText();
+        String pass = textfieldPass.getText();
+        String email = textfieldEmail.getText();
+        if (!user.equals("") && !nombre.equals("") && !pass.equals("") && !email.equals(""))
+        {
+            agregarUsuario2.setEnabled(true);
+        }
+        else
+        {
+            agregarUsuario2.setEnabled(false);
+        }
+    }
 }
