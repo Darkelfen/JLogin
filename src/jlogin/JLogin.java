@@ -414,8 +414,8 @@ public class JLogin extends JFrame implements ActionListener
         formulario.setLayout(new GridLayout(2, 2, 10, 10));
 
         formulario.add(banner2);
-        formulario.add(labelD);
         formulario.add(banner3);
+        formulario.add(labelD);
         formulario.add(labelD2);
         
         frame.add(formulario,BorderLayout.CENTER);
@@ -591,7 +591,7 @@ public class JLogin extends JFrame implements ActionListener
         JButton cambiarContraseña = new JButton("Cambiar Contraseña");
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
-        cambiarContraseña.setForeground(Color.WHITE);
+        Add.setForeground(Color.WHITE);
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
