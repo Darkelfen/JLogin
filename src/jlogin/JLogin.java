@@ -44,6 +44,7 @@ public class JLogin extends JFrame implements ActionListener
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
     private JTable table;
+    private DefaultTableModel model;
 
     public JLogin()
     {   
@@ -95,7 +96,6 @@ public class JLogin extends JFrame implements ActionListener
         passErr.add(emptyPass, BorderLayout.LINE_START);
         passErr.add(errorMsgP, BorderLayout.CENTER);
         
-        
         JPanel leyenda = new JPanel(new BorderLayout());
        
         JLabel legend = new JLabel("Ingenieria En Desarrollo de Videojuegos y Realidad Virtual");
@@ -104,7 +104,6 @@ public class JLogin extends JFrame implements ActionListener
         legend.setForeground(Color.GRAY);
         leyenda.add(legend2,BorderLayout.LINE_START);
         leyenda.add(legend,BorderLayout.CENTER);
-        
         
         this.iniciarSesion = new JButton("Iniciar sesión");
         iniciarSesion.addActionListener(this);
@@ -265,11 +264,15 @@ public class JLogin extends JFrame implements ActionListener
         buttonPanel.add(editarUsuario);
         buttonPanel.add(agregarUsuario);
 
+        // tablemodel
+        model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
         
+        /*
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
-        table = new JTable(rowData, columnNames);
+        */
+        table = new JTable(model);
         
         
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
