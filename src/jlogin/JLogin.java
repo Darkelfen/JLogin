@@ -263,9 +263,9 @@ public class JLogin extends JFrame implements ActionListener
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
         JLabel banner = new JLabel(image);
-        JPanel upperPanel = new JPanel ();
-        JPanel upperPanel2 = new JPanel ();
-        JPanel upperPanel3 = new JPanel ();
+        JPanel upperPanel = new JPanel (new BorderLayout());
+        JPanel upperPanel2 = new JPanel (new BorderLayout());
+        JPanel upperPanel3 = new JPanel (new BorderLayout());
         upperPanel.setLayout(new GridLayout(2, 1, 0, 0));
         upperPanel2.add(barraMenu,BorderLayout.PAGE_START);
         upperPanel3.add(banner);
