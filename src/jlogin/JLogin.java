@@ -221,7 +221,9 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener salir = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                
+                window.dispose();
+                JLogin momo = new JLogin();
+                momo.setVisible(true); 
             }
         };
         this.salir.addActionListener(salir);
@@ -229,9 +231,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
-                JLogin momo = new JLogin();
-                momo.setVisible(true);
+
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
