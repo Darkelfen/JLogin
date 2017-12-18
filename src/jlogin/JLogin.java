@@ -34,7 +34,7 @@ public class JLogin extends JFrame implements ActionListener
     private JButton eliminarUsuario;
     private JButton editarUsuario;
     private JButton agregarUsuario;
-    
+    private JButton volver;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
     private JLabel errorMsgU;
@@ -95,17 +95,34 @@ public class JLogin extends JFrame implements ActionListener
         passErr.add(emptyPass, BorderLayout.LINE_START);
         passErr.add(errorMsgP, BorderLayout.CENTER);
         
+        
+        JPanel leyenda = new JPanel(new BorderLayout());
+       
+        JLabel legend = new JLabel("Ingenieria En Desarrollo de Videojuegos y Realidad Virtual");
+        JLabel legend2 = new JLabel("                                           ");
+        legend.setPreferredSize(new Dimension (100,24));
+        legend.setForeground(Color.GRAY);
+        leyenda.add(legend2,BorderLayout.LINE_START);
+        leyenda.add(legend,BorderLayout.CENTER);
+        
+        
         this.iniciarSesion = new JButton("Iniciar sesión");
         iniciarSesion.addActionListener(this);
         iniciarSesion.setBackground(Color.BLUE);
         iniciarSesion.setForeground(Color.WHITE);
+        
+        
+        
+        
+        
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(5, 1, 10, 10));
+        formulario.setLayout(new GridLayout(6, 1, 10, 10));
         formulario.add(primeraFila);
         formulario.add(userErr);
         formulario.add(segundaFila);
         formulario.add(passErr);
         formulario.add(iniciarSesion);
+        formulario.add(leyenda);
         
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -179,6 +196,12 @@ public class JLogin extends JFrame implements ActionListener
         if (e.getSource() == this.eliminarUsuario)
         {
            // this.table.getModel()).removeRow(this.table.getRowSelected());
+        }
+        if (e.getSource() == this.volver)
+        {
+            window.dispose();
+            JFrame mimi = openWindow();
+            mimi.setVisible(true); 
         }
         
     }
@@ -321,35 +344,43 @@ public class JLogin extends JFrame implements ActionListener
         ImageIcon image = new ImageIcon("banner.png");
         ImageIcon image2 = new ImageIcon("meme.jpg");
         ImageIcon image3 = new ImageIcon("meme2.jpg");
-        JLabel labelD = new JLabel("Estos pelmazos culiaos son los desarrolladores");
+        JLabel labelD = new JLabel("Desarrolladores: José Rojas y Gerardo Gonzalez");
+        JLabel labelD2 = new JLabel("Estudiantes de Ing. En Desarrollo de Videouegos y Realidad Virtual");
+        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 800);
         
+        this.volver = new JButton("Volver");
+        volver.addActionListener(this);
+        volver.setBackground(Color.RED);
+        volver.setForeground(Color.WHITE);
         JLabel banner = new JLabel(image);
         JLabel banner2 = new JLabel(image2);
         JLabel banner3 = new JLabel(image3);
         JPanel PanelBanner = new JPanel();
-        //this.cerrarSesion = new JButton("Cerrar sesión");
-        //cerrarSesion.addActionListener(this);
+        
         PanelBanner.setBackground( new Color(190, 11, 103) );
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
+        
+        
+        
         JPanel formulario = new JPanel();
         
         formulario.setLayout(new GridLayout(2, 2, 10, 10));
-        formulario.setPreferredSize(new Dimension(100,24));
+        
         
         formulario.add(banner2);
         formulario.add(labelD);
         formulario.add(banner3);
+        formulario.add(labelD2);
+        
         frame.add(formulario,BorderLayout.CENTER);
-        //frame.add(cerrarSesion,BorderLayout.SOUTH);
+        
         return (frame);
     }
 
-    private Dimension Dimension(int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
