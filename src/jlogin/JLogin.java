@@ -19,12 +19,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-<<<<<<< HEAD
 import javax.swing.ListSelectionModel;
-=======
 import static javax.swing.UIManager.get;
 import static javax.swing.UIManager.get;
->>>>>>> cfd466e279e809a0c5cf136d8603aaae47206a0f
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -56,13 +53,7 @@ public class JLogin extends JFrame implements ActionListener
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         super.setSize(900, 600);
         super.setMinimumSize(new Dimension(900, 400));
-            
-       
-        
-        
-        
-         
-        
+
         ImageIcon image = new ImageIcon("banner.png");
         JLabel banner = new JLabel(image);
         JPanel panelBanner = new JPanel();
