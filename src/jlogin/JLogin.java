@@ -273,7 +273,10 @@ public class JLogin extends JFrame implements ActionListener
         model.addRow(new String[] {"Admin", "Administrador", "a@a.com", "Password"});
         for (int i = 0; i < this.usuarios.size(); i++)
         {
-            
+            model.addRow(new String[] { usuarios.get(i).getUsuario(), 
+                usuarios.get(i).getNombre(), 
+                usuarios.get(i).getMail(),
+                usuarios.get(i).getPass()});
         }
         /*
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
@@ -342,7 +345,6 @@ public class JLogin extends JFrame implements ActionListener
                 window.dispose();
                 JFrame meme = NewWindow();
                 meme.setVisible(true);
-                saveUsuarios();
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
@@ -397,4 +399,22 @@ public class JLogin extends JFrame implements ActionListener
     public void saveUsuarios ()
     {
     }
+
+    public int sizeU() {
+        return usuarios.size();
+    }
+
+    public Usuario getU(int index) {
+        return usuarios.get(index);
+    }
+
+    public boolean addU(Usuario e) {
+        return usuarios.add(e);
+    }
+
+    public Usuario removeU(int index) {
+        return usuarios.remove(index);
+    }
+    
+    
 }
