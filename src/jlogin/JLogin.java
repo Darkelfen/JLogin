@@ -202,6 +202,12 @@ public class JLogin extends JFrame implements ActionListener
         
         if( e.getSource() == this.agregarUsuario2)
         {
+                //Añadir usuario acá
+                //String user = textfieldUser.getText();
+                //String nombre = textfieldNombreReal.getText();
+                //String pass = textfieldPass.getText();
+                //String email = textfieldEmail.getText();
+            
                 saveUsuarios();
                 addUserWindow.dispose();
                 JFrame meme = openWindow();
