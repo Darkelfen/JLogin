@@ -181,8 +181,6 @@ public class JLogin extends JFrame implements ActionListener
            // this.table.getModel()).removeRow(this.table.getRowSelected());
         }
         
-        /* if (e.getSource() == )*/
-        
     }
 
     JFrame openWindow()
