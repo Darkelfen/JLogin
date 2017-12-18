@@ -263,9 +263,39 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-
+                window.dispose();
+                JFrame meme = NewWindow();
+                meme.setVisible(true); 
+                
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
+    }
+    
+     JFrame NewWindow()
+    {
+        ImageIcon image = new ImageIcon("banner.png");
+        ImageIcon image2 = new ImageIcon("meme.jpg");
+        ImageIcon image3 = new ImageIcon("meme2.jpg");
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(900, 600);
+        JLabel banner = new JLabel(image);
+        JLabel banner2 = new JLabel(image2);
+        JLabel banner3 = new JLabel(image3);
+        JPanel PanelBanner = new JPanel();
+        //this.cerrarSesion = new JButton("Cerrar sesión");
+        //cerrarSesion.addActionListener(this);
+        frame.add(PanelBanner);
+        PanelBanner.add(banner,BorderLayout.PAGE_START);
+        
+        JPanel formulario = new JPanel();
+        formulario.setLayout(new GridLayout(1, 2, 100, 100));
+        
+        formulario.add(banner2);
+        formulario.add(banner3);
+        frame.add(formulario);
+        //frame.add(cerrarSesion,BorderLayout.SOUTH);
+        return (frame);
     }
 }
