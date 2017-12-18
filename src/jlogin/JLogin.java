@@ -50,8 +50,8 @@ public class JLogin extends JFrame implements ActionListener
      private JPasswordField textfieldPass2;
     private JLabel errorMsgU;
     private JLabel errorMsgP;
-    private JFrame window;
-    private JFrame mumu;
+    private JFrame mainWindow;
+    private JFrame addUserWindow;
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
@@ -177,7 +177,7 @@ public class JLogin extends JFrame implements ActionListener
             
             if( ( user.equals("admin") && pass.equals("admin") ) || ( user.equals("a") && pass.equals("a") ))
             {
-                window = openWindow();
+                mainWindow = openWindow();
                 this.dispose();
             }
             else
@@ -188,7 +188,7 @@ public class JLogin extends JFrame implements ActionListener
         }
         if( e.getSource() == this.cerrarSesion )
         {
-            window.dispose();
+            mainWindow.dispose();
             JLogin momo = new JLogin();
             momo.setVisible(true);
         }
@@ -200,7 +200,7 @@ public class JLogin extends JFrame implements ActionListener
         
         if( e.getSource() == this.agregarUsuario2)
         {
-                mumu.dispose();
+                addUserWindow.dispose();
                 JFrame meme = openWindow();
                 meme.setVisible(true);
                 this.dispose();
@@ -331,7 +331,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener infoUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
+                mainWindow.dispose();
                 JFrame memi = MostrarInfo();
                 memi.setVisible(true);
             }
@@ -341,7 +341,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener cambiarPass = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
+                mainWindow.dispose();
                 JFrame momi = CambiarPass();
                 momi.setVisible(true);
             }
@@ -351,7 +351,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener editarUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
+                mainWindow.dispose();
                 JFrame memu = EditUser();
                 memu.setVisible(true);
             }
@@ -361,7 +361,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener salir = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
+                mainWindow.dispose();
                 JLogin momo = new JLogin();
                 momo.setVisible(true); 
                 saveUsuarios();
@@ -372,9 +372,9 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener agregarUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
-                mumu = AddUser();
-                mumu.setVisible(true); 
+                mainWindow.dispose();
+                addUserWindow = AddUser();
+                addUserWindow.setVisible(true); 
                
             }
         };
@@ -383,7 +383,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                window.dispose();
+                mainWindow.dispose();
                 JFrame meme = NewWindow();
                 meme.setVisible(true);
             }
@@ -480,6 +480,7 @@ public class JLogin extends JFrame implements ActionListener
         agregarUsuario2.addActionListener(this);
         agregarUsuario2.setBackground(Color.BLUE);
         agregarUsuario2.setForeground(Color.WHITE);
+        agregarUsuario2.setEnabled(false);
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(5, 1, 10, 10));
@@ -541,10 +542,7 @@ public class JLogin extends JFrame implements ActionListener
         labelPass.setPreferredSize(new Dimension(100, 2));
         
         Pass.add(labelPass, BorderLayout.LINE_START);
-        
-        
-       
-        
+
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(4, 1, 10, 10));
         formulario.add(User);
@@ -596,6 +594,7 @@ public class JLogin extends JFrame implements ActionListener
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
         agregarUsuario2.setForeground(Color.WHITE);
+        
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
