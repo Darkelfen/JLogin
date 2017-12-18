@@ -264,8 +264,8 @@ public class JLogin extends JFrame implements ActionListener
             }
             else
             {
-                editarUsuario.setEnabled(true);
-                eliminarUsuario.setEnabled(true);
+                editarUsuario.setEnabled(false);
+                eliminarUsuario.setEnabled(false);
             }
         }
         });
