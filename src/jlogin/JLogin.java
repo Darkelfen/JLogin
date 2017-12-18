@@ -135,7 +135,7 @@ public class JLogin extends JFrame implements ActionListener
                 textfieldContrasena.requestFocus();
             }
             
-            if( ( user.equals("Administrador") && pass.equals("idvrv-utalca") ) || ( user.equals("a") && pass.equals("a") ))
+            if( ( user.equals("admin") && pass.equals("admin") ) || ( user.equals("a") && pass.equals("a") ))
             {
                 window = openWindow();
                 this.dispose();
@@ -194,7 +194,7 @@ public class JLogin extends JFrame implements ActionListener
         JTable table = new JTable(rowData, columnNames);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.AFTER_LINE_ENDS);
+        frame.add(scrollPane, BorderLayout.SOUTH);
         
         frame.setVisible(true);
         return (frame);
