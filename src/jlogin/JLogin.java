@@ -34,7 +34,7 @@ public class JLogin extends JFrame implements ActionListener
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
     private JTable jTable1;
-    
+
     public JLogin()
     {
         super("Formulario de Inicio de Sesión");
@@ -221,7 +221,7 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener salir = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                //
+                
             }
         };
         this.salir.addActionListener(salir);
@@ -229,7 +229,9 @@ public class JLogin extends JFrame implements ActionListener
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
-                //
+                window.dispose();
+                JLogin momo = new JLogin();
+                momo.setVisible(true);
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
