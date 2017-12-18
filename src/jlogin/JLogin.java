@@ -327,13 +327,14 @@ public class JLogin extends JFrame implements ActionListener
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 800);
+        
         JLabel banner = new JLabel(image);
         JLabel banner2 = new JLabel(image2);
         JLabel banner3 = new JLabel(image3);
         JPanel PanelBanner = new JPanel();
         //this.cerrarSesion = new JButton("Cerrar sesión");
         //cerrarSesion.addActionListener(this);
-        
+        PanelBanner.setBackground( new Color(190, 11, 103) );
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
