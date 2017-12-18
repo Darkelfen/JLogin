@@ -197,9 +197,12 @@ public class JLogin extends JFrame implements ActionListener
 
         }
         
-        if( e.getSource() == this.agregarUsuario )
+        if( e.getSource() == this.Add)
         {
-
+                
+                JFrame meme = openWindow();
+                meme.setVisible(true);
+                this.dispose();
         }
         
         if (e.getSource() == this.eliminarUsuario)
