@@ -64,9 +64,10 @@ public class JLogin extends JFrame implements ActionListener
         
         JPanel primeraFila = new JPanel(new BorderLayout());
         JLabel labelNombre = new JLabel("Nombre de usuario");
-        labelNombre.setPreferredSize(new Dimension(100, 24));
+        JLabel labelNombre2 = new JLabel("     ");
+        labelNombre.setPreferredSize(new Dimension(120, 24));
         this.textfieldNombre = new JTextField();
-        textfieldNombre.setPreferredSize(new Dimension(500, 24));
+        textfieldNombre.setPreferredSize(new Dimension(450, 24));
         primeraFila.add(labelNombre, BorderLayout.LINE_START);
         primeraFila.add(textfieldNombre, BorderLayout.CENTER);
         
@@ -287,9 +288,10 @@ public class JLogin extends JFrame implements ActionListener
         ImageIcon image = new ImageIcon("banner.png");
         ImageIcon image2 = new ImageIcon("meme.jpg");
         ImageIcon image3 = new ImageIcon("meme2.jpg");
+        JLabel labelD = new JLabel("Estos pelmazos culiaos son los desarrolladores");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(900, 600);
+        frame.setSize(900, 800);
         JLabel banner = new JLabel(image);
         JLabel banner2 = new JLabel(image2);
         JLabel banner3 = new JLabel(image3);
@@ -301,12 +303,19 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(1, 2, 10, 10));
+        
+        formulario.setLayout(new GridLayout(2, 2, 10, 10));
+        formulario.setPreferredSize(new Dimension(100,24));
         
         formulario.add(banner2);
+        formulario.add(labelD);
         formulario.add(banner3);
         frame.add(formulario,BorderLayout.CENTER);
         //frame.add(cerrarSesion,BorderLayout.SOUTH);
         return (frame);
+    }
+
+    private Dimension Dimension(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
