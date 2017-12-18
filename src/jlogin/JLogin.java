@@ -19,6 +19,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import static javax.swing.UIManager.get;
+import static javax.swing.UIManager.get;
 import javax.swing.border.EmptyBorder;
 
 public class JLogin extends JFrame implements ActionListener
@@ -40,11 +42,19 @@ public class JLogin extends JFrame implements ActionListener
     private JTable jTable1;
 
     public JLogin()
-    {
+    {   
+        
         super("Formulario de Inicio de Sesión");
+       
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         super.setSize(900, 600);
         super.setMinimumSize(new Dimension(900, 400));
+            
+       
+        
+        
+        
+         
         
         ImageIcon image = new ImageIcon("banner.png");
         JLabel banner = new JLabel(image);
@@ -109,7 +119,7 @@ public class JLogin extends JFrame implements ActionListener
         super.getContentPane().add(panel);
         
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -286,6 +296,7 @@ public class JLogin extends JFrame implements ActionListener
         JPanel PanelBanner = new JPanel();
         //this.cerrarSesion = new JButton("Cerrar sesión");
         //cerrarSesion.addActionListener(this);
+        
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
