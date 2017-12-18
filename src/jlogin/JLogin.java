@@ -25,6 +25,10 @@ public class JLogin extends JFrame implements ActionListener
 {
     private JButton iniciarSesion;
     private JButton cerrarSesion;
+    private JButton eliminarUsuario;
+    private JButton editarUsuario;
+    private JButton agregarUsuario;
+    
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
     private JLabel errorMsgU;
@@ -163,6 +167,8 @@ public class JLogin extends JFrame implements ActionListener
         this.cambiarPass = new JMenuItem("Cambiar contraseña");
         this.salir = new JMenuItem("Salir");
         this.equipoDesarrollo = new JMenuItem("Acerca del Equipo de Desarrollo");
+        this.cerrarSesion = new JButton("Salir");
+        iniciarSesion.addActionListener(this);
         
         this.barraMenu.add(this.menuArchivo);
             this.menuArchivo.add(this.infoUsuario);
@@ -173,7 +179,7 @@ public class JLogin extends JFrame implements ActionListener
             this.menuAyuda.add(this.equipoDesarrollo);
         
         this.setJMenuBar(this.barraMenu);
-        
+         
         this.programaEventos();
         
         ImageIcon image = new ImageIcon("banner2.png");
@@ -181,13 +187,12 @@ public class JLogin extends JFrame implements ActionListener
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
         JLabel banner = new JLabel(image);
-        //this.cerrarSesion = new JButton("Cerrar sesión");
-        //cerrarSesion.addActionListener(this);
         frame.add(barraMenu,BorderLayout.PAGE_START);
         frame.add(banner,BorderLayout.LINE_START);
-        //frame.add(cerrarSesion,BorderLayout.SOUTH);
         
-        
+        //Hacer frame botones
+        frame.add(cerrarSesion,BorderLayout.LINE_END);
+
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
@@ -227,6 +232,7 @@ public class JLogin extends JFrame implements ActionListener
             }
         };
         this.salir.addActionListener(salir);
+        this.cerrarSesion.addActionListener(salir);
         
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
