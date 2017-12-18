@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,13 +46,14 @@ public class JLogin extends JFrame implements ActionListener
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
     private JTable table;
     private DefaultTableModel model;
+    private ArrayList<Usuario> usuarios;
 
     public JLogin()
     {   
         
         super("Formulario de Inicio de Sesión");
        
-        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         super.setSize(900, 600);
         super.setMinimumSize(new Dimension(900, 400));
 
@@ -128,6 +130,8 @@ public class JLogin extends JFrame implements ActionListener
         panel.add(centro, BorderLayout.CENTER);
         
         super.getContentPane().add(panel);
+        
+        this.usuarios = loadUsuarios();
         
     }
     
@@ -269,15 +273,18 @@ public class JLogin extends JFrame implements ActionListener
 
         // tablemodel
         model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
-        
+        model.addRow(new String[] {"Admin", "Administrador", "a@a.com", "Password"});
+        for (int i = 0; i < this.usuarios.size(); i++)
+        {
+            
+        }
         /*
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
         */
         table = new JTable(model);
-        
-        
+
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
         public void valueChanged(ListSelectionEvent event) {
@@ -295,7 +302,7 @@ public class JLogin extends JFrame implements ActionListener
             }
         }
         });
-
+        
         JScrollPane scrollPane = new JScrollPane(table);
         frame.add(scrollPane, BorderLayout.CENTER);
         frame.add(buttonPanel,BorderLayout.SOUTH);
@@ -327,6 +334,7 @@ public class JLogin extends JFrame implements ActionListener
                 window.dispose();
                 JLogin momo = new JLogin();
                 momo.setVisible(true); 
+                saveUsuarios();
             }
         };
         this.salir.addActionListener(salir);
@@ -336,7 +344,8 @@ public class JLogin extends JFrame implements ActionListener
             {
                 window.dispose();
                 JFrame meme = NewWindow();
-                meme.setVisible(true);  
+                meme.setVisible(true);
+                saveUsuarios();
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
@@ -380,5 +389,15 @@ public class JLogin extends JFrame implements ActionListener
         
         return (frame);
     }
- 
+
+    public ArrayList<Usuario> loadUsuarios ()
+    {
+        ArrayList<Usuario> a;
+        a = new ArrayList<Usuario> ();
+        return a;
+    }
+
+    public void saveUsuarios ()
+    {
+    }
 }
