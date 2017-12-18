@@ -290,11 +290,11 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(1, 2, 100, 100));
+        formulario.setLayout(new GridLayout(1, 2, 10, 10));
         
         formulario.add(banner2);
         formulario.add(banner3);
-        frame.add(formulario);
+        frame.add(formulario,BorderLayout.CENTER);
         //frame.add(cerrarSesion,BorderLayout.SOUTH);
         return (frame);
     }
