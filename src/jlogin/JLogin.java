@@ -35,7 +35,7 @@ public class JLogin extends JFrame implements ActionListener
     private JButton eliminarUsuario;
     private JButton editarUsuario;
     private JButton agregarUsuario;
-    private JButton Add;
+    private JButton agregarUsuario2;
     private JButton cambiarContraseña;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
@@ -51,6 +51,7 @@ public class JLogin extends JFrame implements ActionListener
     private JLabel errorMsgU;
     private JLabel errorMsgP;
     private JFrame window;
+    private JFrame mumu;
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
@@ -197,9 +198,9 @@ public class JLogin extends JFrame implements ActionListener
 
         }
         
-        if( e.getSource() == this.Add)
+        if( e.getSource() == this.agregarUsuario2)
         {
-                
+                mumu.dispose();
                 JFrame meme = openWindow();
                 meme.setVisible(true);
                 this.dispose();
@@ -372,7 +373,7 @@ public class JLogin extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 window.dispose();
-                JFrame mumu = AddUser();
+                mumu = AddUser();
                 mumu.setVisible(true); 
                
             }
@@ -475,10 +476,10 @@ public class JLogin extends JFrame implements ActionListener
         Pass.add(labelPass, BorderLayout.LINE_START);
         Pass.add(textfieldPass, BorderLayout.CENTER);
         
-        this.Add = new JButton("Agregar");
-        Add.addActionListener(this);
-        Add.setBackground(Color.BLUE);
-        Add.setForeground(Color.WHITE);
+        this.agregarUsuario2 = new JButton("Agregar");
+        agregarUsuario2.addActionListener(this);
+        agregarUsuario2.setBackground(Color.BLUE);
+        agregarUsuario2.setForeground(Color.WHITE);
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(5, 1, 10, 10));
@@ -486,7 +487,7 @@ public class JLogin extends JFrame implements ActionListener
         formulario.add(Nombre);
         formulario.add(email);
         formulario.add(Pass);
-        formulario.add(Add,BorderLayout.SOUTH);
+        formulario.add(agregarUsuario2,BorderLayout.SOUTH);
         
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -594,7 +595,7 @@ public class JLogin extends JFrame implements ActionListener
         JButton cambiarContraseña = new JButton("Cambiar Contraseña");
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
-        Add.setForeground(Color.WHITE);
+        agregarUsuario2.setForeground(Color.WHITE);
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
