@@ -156,6 +156,17 @@ public class JLogin extends JFrame implements ActionListener
             JLogin momo = new JLogin();
             momo.setVisible(true);
         }
+        
+        if( e.getSource() == this.editarUsuario )
+        {
+
+        }
+        
+        if( e.getSource() == this.agregarUsuario )
+        {
+
+        }
+        
     }
 
     JFrame openWindow()
@@ -167,8 +178,15 @@ public class JLogin extends JFrame implements ActionListener
         this.cambiarPass = new JMenuItem("Cambiar contraseña");
         this.salir = new JMenuItem("Salir");
         this.equipoDesarrollo = new JMenuItem("Acerca del Equipo de Desarrollo");
-        this.cerrarSesion = new JButton("Salir");
-        iniciarSesion.addActionListener(this);
+        this.cerrarSesion = new JButton("Cerrar");
+        this.eliminarUsuario = new JButton("Eliminar");
+        this.editarUsuario = new JButton("Editar");
+        this.agregarUsuario = new JButton("Agregar");
+        
+        cerrarSesion.addActionListener(this);
+        eliminarUsuario.addActionListener(this);
+        editarUsuario.addActionListener(this);
+        agregarUsuario.addActionListener(this);       
         
         this.barraMenu.add(this.menuArchivo);
             this.menuArchivo.add(this.infoUsuario);
@@ -187,10 +205,19 @@ public class JLogin extends JFrame implements ActionListener
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
         JLabel banner = new JLabel(image);
-        frame.add(barraMenu,BorderLayout.PAGE_START);
-        frame.add(banner,BorderLayout.LINE_START);
-        //Hacer frame botones
-        frame.add(cerrarSesion,BorderLayout.LINE_END);
+        JPanel upperPanel = new JPanel ();
+        upperPanel.setLayout(new GridLayout(2, 1, 10, 10));
+        upperPanel.add(barraMenu);
+        upperPanel.add(banner);
+
+        frame.add(upperPanel, BorderLayout.NORTH);
+        
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 4, 10, 10));
+        buttonPanel.add(cerrarSesion);
+        buttonPanel.add(eliminarUsuario);
+        buttonPanel.add(editarUsuario);
+        buttonPanel.add(agregarUsuario);
 
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
@@ -198,8 +225,8 @@ public class JLogin extends JFrame implements ActionListener
         JTable table = new JTable(rowData, columnNames);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.SOUTH);
-        
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.add(buttonPanel,BorderLayout.SOUTH);
         frame.setVisible(true);
         return (frame);
     }
