@@ -110,11 +110,7 @@ public class JLogin extends JFrame implements ActionListener
         iniciarSesion.addActionListener(this);
         iniciarSesion.setBackground(Color.BLUE);
         iniciarSesion.setForeground(Color.WHITE);
-        
-        
-        
-        
-        
+      
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(6, 1, 10, 10));
         formulario.add(primeraFila);
@@ -269,10 +265,13 @@ public class JLogin extends JFrame implements ActionListener
         buttonPanel.add(editarUsuario);
         buttonPanel.add(agregarUsuario);
 
+        
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
         table = new JTable(rowData, columnNames);
+        
+        
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
         public void valueChanged(ListSelectionEvent event) {
@@ -325,15 +324,13 @@ public class JLogin extends JFrame implements ActionListener
             }
         };
         this.salir.addActionListener(salir);
-        this.cerrarSesion.addActionListener(salir);
         
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
                 window.dispose();
                 JFrame meme = NewWindow();
-                meme.setVisible(true); 
-                
+                meme.setVisible(true);  
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
@@ -363,15 +360,11 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.setBackground( new Color(190, 11, 103) );
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
-        
-        
-        
-        
+
         JPanel formulario = new JPanel();
         
         formulario.setLayout(new GridLayout(2, 2, 10, 10));
-        
-        
+
         formulario.add(banner2);
         formulario.add(labelD);
         formulario.add(banner3);
@@ -381,6 +374,5 @@ public class JLogin extends JFrame implements ActionListener
         
         return (frame);
     }
-
-    
+ 
 }
