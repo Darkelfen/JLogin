@@ -189,7 +189,6 @@ public class JLogin extends JFrame implements ActionListener
         JLabel banner = new JLabel(image);
         frame.add(barraMenu,BorderLayout.PAGE_START);
         frame.add(banner,BorderLayout.LINE_START);
-        
         //Hacer frame botones
         frame.add(cerrarSesion,BorderLayout.LINE_END);
 
