@@ -35,9 +35,16 @@ public class JLogin extends JFrame implements ActionListener
     private JButton eliminarUsuario;
     private JButton editarUsuario;
     private JButton agregarUsuario;
-    private JButton volver;
+    private JButton Add;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
+    
+    private JTextField textfieldUser;
+    private JTextField textfieldNombreReal;
+    private JTextField textfieldEmail;
+    private JPasswordField textfieldPass;
+    
+    
     private JLabel errorMsgU;
     private JLabel errorMsgP;
     private JFrame window;
@@ -196,12 +203,7 @@ public class JLogin extends JFrame implements ActionListener
         {
            // this.table.getModel()).removeRow(this.table.getRowSelected());
         }
-        if (e.getSource() == this.volver)
-        {
-            window.dispose();
-            JFrame mimi = openWindow();
-            mimi.setVisible(true); 
-        }
+        
         
     }
 
@@ -342,6 +344,17 @@ public class JLogin extends JFrame implements ActionListener
         };
         this.salir.addActionListener(salir);
         
+        ActionListener agregarUsuario = new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                window.dispose();
+                JFrame mumu = AddUser();
+                mumu.setVisible(true); 
+               
+            }
+        };
+        this.agregarUsuario.addActionListener(agregarUsuario);
+        
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -365,10 +378,7 @@ public class JLogin extends JFrame implements ActionListener
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 800);
         
-        this.volver = new JButton("Volver");
-        volver.addActionListener(this);
-        volver.setBackground(Color.RED);
-        volver.setForeground(Color.WHITE);
+        
         JLabel banner = new JLabel(image);
         JLabel banner2 = new JLabel(image2);
         JLabel banner3 = new JLabel(image3);
@@ -391,7 +401,73 @@ public class JLogin extends JFrame implements ActionListener
         
         return (frame);
     }
-
+     JFrame AddUser()
+     {
+         ImageIcon image = new ImageIcon("banner.png");
+         
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(900, 600);
+        frame.setMinimumSize(new Dimension(900, 400));
+        JPanel PanelBanner = new JPanel();
+        JLabel banner = new JLabel(image);
+        PanelBanner.add(banner);
+        PanelBanner.setBackground(new Color(190, 11, 103));
+        frame.add(PanelBanner,BorderLayout.PAGE_START);
+        
+        JPanel User = new JPanel(new BorderLayout());
+        JLabel labelUser = new JLabel("Nombre de usuario");
+        
+        labelUser.setPreferredSize(new Dimension(120, 24));
+        this.textfieldUser = new JTextField();
+        textfieldUser.setPreferredSize(new Dimension(100, 24));
+        User.add(labelUser, BorderLayout.LINE_START);
+        User.add(textfieldUser, BorderLayout.CENTER);
+        
+        
+        JPanel Nombre = new JPanel(new BorderLayout());
+        JLabel labelNombre = new JLabel("Nombre Real");
+        
+        labelNombre.setPreferredSize(new Dimension(120, 24));
+        this.textfieldNombreReal = new JTextField();
+        textfieldNombreReal.setPreferredSize(new Dimension(100, 24));
+        Nombre.add(labelNombre, BorderLayout.LINE_START);
+        Nombre.add(textfieldNombreReal, BorderLayout.CENTER);
+        
+        JPanel email = new JPanel(new BorderLayout());
+        JLabel labelEmail = new JLabel("Email");
+        
+        labelEmail.setPreferredSize(new Dimension(120, 10));
+        this.textfieldEmail = new JTextField();
+        textfieldEmail.setPreferredSize(new Dimension(100, 2));
+        email.add(labelEmail, BorderLayout.LINE_START);
+        email.add(textfieldEmail, BorderLayout.CENTER);
+        
+        JPanel Pass = new JPanel(new BorderLayout());
+        JLabel labelPass = new JLabel("Contraseña");
+        labelPass.setPreferredSize(new Dimension(100, 2));
+        this.textfieldPass = new JPasswordField();
+        textfieldPass.setPreferredSize(new Dimension(100, 2));
+        Pass.add(labelPass, BorderLayout.LINE_START);
+        Pass.add(textfieldPass, BorderLayout.CENTER);
+        
+        this.Add = new JButton("Agregar");
+        Add.addActionListener(this);
+        Add.setBackground(Color.BLUE);
+        Add.setForeground(Color.WHITE);
+        
+        JPanel formulario = new JPanel();
+        formulario.setLayout(new GridLayout(5, 1, 10, 10));
+        formulario.add(User);
+        formulario.add(Nombre);
+        formulario.add(email);
+        formulario.add(Pass);
+        frame.add(Add,BorderLayout.SOUTH);
+        
+        frame.add(formulario,BorderLayout.CENTER);
+        
+         return frame;
+     }
     public ArrayList<Usuario> loadUsuarios ()
     {
         ArrayList<Usuario> a;
