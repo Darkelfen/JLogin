@@ -19,7 +19,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+<<<<<<< HEAD
 import javax.swing.ListSelectionModel;
+=======
+import static javax.swing.UIManager.get;
+import static javax.swing.UIManager.get;
+>>>>>>> cfd466e279e809a0c5cf136d8603aaae47206a0f
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -44,11 +49,19 @@ public class JLogin extends JFrame implements ActionListener
     private JTable table;
 
     public JLogin()
-    {
+    {   
+        
         super("Formulario de Inicio de Sesión");
+       
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         super.setSize(900, 600);
         super.setMinimumSize(new Dimension(900, 400));
+            
+       
+        
+        
+        
+         
         
         ImageIcon image = new ImageIcon("banner.png");
         JLabel banner = new JLabel(image);
@@ -58,9 +71,10 @@ public class JLogin extends JFrame implements ActionListener
         
         JPanel primeraFila = new JPanel(new BorderLayout());
         JLabel labelNombre = new JLabel("Nombre de usuario");
-        labelNombre.setPreferredSize(new Dimension(100, 24));
+        JLabel labelNombre2 = new JLabel("     ");
+        labelNombre.setPreferredSize(new Dimension(120, 24));
         this.textfieldNombre = new JTextField();
-        textfieldNombre.setPreferredSize(new Dimension(500, 24));
+        textfieldNombre.setPreferredSize(new Dimension(450, 24));
         primeraFila.add(labelNombre, BorderLayout.LINE_START);
         primeraFila.add(textfieldNombre, BorderLayout.CENTER);
         
@@ -113,7 +127,7 @@ public class JLogin extends JFrame implements ActionListener
         super.getContentPane().add(panel);
         
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -318,25 +332,34 @@ public class JLogin extends JFrame implements ActionListener
         ImageIcon image = new ImageIcon("banner.png");
         ImageIcon image2 = new ImageIcon("meme.jpg");
         ImageIcon image3 = new ImageIcon("meme2.jpg");
+        JLabel labelD = new JLabel("Estos pelmazos culiaos son los desarrolladores");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(900, 600);
+        frame.setSize(900, 800);
         JLabel banner = new JLabel(image);
         JLabel banner2 = new JLabel(image2);
         JLabel banner3 = new JLabel(image3);
         JPanel PanelBanner = new JPanel();
         //this.cerrarSesion = new JButton("Cerrar sesión");
         //cerrarSesion.addActionListener(this);
+        
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         PanelBanner.add(banner,BorderLayout.PAGE_START);
         
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(1, 2, 10, 10));
+        
+        formulario.setLayout(new GridLayout(2, 2, 10, 10));
+        formulario.setPreferredSize(new Dimension(100,24));
         
         formulario.add(banner2);
+        formulario.add(labelD);
         formulario.add(banner3);
         frame.add(formulario,BorderLayout.CENTER);
         //frame.add(cerrarSesion,BorderLayout.SOUTH);
         return (frame);
+    }
+
+    private Dimension Dimension(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
