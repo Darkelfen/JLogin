@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -215,7 +216,7 @@ public class JLogin extends JFrame implements ActionListener
                         String nombre = textfieldNombreReal.getText();
                         String pass = textfieldPass.getText();
                         String email = textfieldEmail.getText();
-                         this.usuarios.add(new Usuario(user,nombre,pass,email));
+                         this.usuarios.add(new Usuario(user,nombre,email,pass));
                          System.out.println("Participante ingresad@ correctamente.");
                     } 
                     catch (Exception er)
@@ -231,18 +232,11 @@ public class JLogin extends JFrame implements ActionListener
         }
         
         if (e.getSource() == this.eliminarUsuario)
-        {
-           
-
-                        
-                DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-                int[] rows = table.getSelectedRows();
-                for(int i=0;i<rows.length;i++){
-                  model.removeRow(rows[i]-i);
-                }
-             
-                saveUsuarios();
-            
+        { 
+            DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+            int row = table.getSelectedRow();
+            model.removeRow(row);
+            saveUsuarios();
         }
         if (e.getSource() == this.cambiarContraseña)
         {
@@ -618,38 +612,26 @@ public class JLogin extends JFrame implements ActionListener
         labelNombre.setPreferredSize(new Dimension(120, 24));
         
         Nombre.add(labelNombre, BorderLayout.LINE_START);
-        
-        
+
         JPanel email = new JPanel(new BorderLayout());
         JLabel labelEmail = new JLabel("Email");
         
         labelEmail.setPreferredSize(new Dimension(120, 10));
         
         email.add(labelEmail, BorderLayout.LINE_START);
-       
-        
+
         JPanel Pass = new JPanel(new BorderLayout());
         JLabel labelPass = new JLabel("Contraseña");
         labelPass.setPreferredSize(new Dimension(100, 2));
-        
         Pass.add(labelPass, BorderLayout.LINE_START);
-        
-        
-        
-        
-        
-        
-        
+
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(4, 2, 10, 10));
         formulario.add(User);
         formulario.add(Nombre);
         formulario.add(email);
         formulario.add(Pass);
-        
-        
-        
-        
+
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
@@ -660,7 +642,7 @@ public class JLogin extends JFrame implements ActionListener
      }
      JFrame CambiarPass()
      {
-         ImageIcon image = new ImageIcon("banner.png");
+        ImageIcon image = new ImageIcon("banner.png");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
@@ -671,7 +653,6 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.setBackground(new Color(190, 11, 103));
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         
-        
         JPanel primeraFila = new JPanel(new BorderLayout());
         JLabel labelContrasena1 = new JLabel("Ingrese Contraseña Antigua");
         labelContrasena1.setPreferredSize(new Dimension(200, 24));
@@ -680,8 +661,6 @@ public class JLogin extends JFrame implements ActionListener
         primeraFila.add(labelContrasena1,BorderLayout.LINE_START);
         primeraFila.add(textfieldPass1, BorderLayout.AFTER_LINE_ENDS);
         
-        
-
         JPanel segundaFila = new JPanel(new BorderLayout());
         JLabel labelContrasena2 = new JLabel("Ingrese Contraseña Nueva");
         labelContrasena2.setPreferredSize(new Dimension(200, 24));
@@ -694,7 +673,6 @@ public class JLogin extends JFrame implements ActionListener
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
         agregarUsuario2.setForeground(Color.WHITE);
-        
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
@@ -732,6 +710,15 @@ public class JLogin extends JFrame implements ActionListener
 
     public void saveUsuarios ()
     {
+        this.usuarios.clear();
+        for (int i=0; i < this.model.getRowCount(); i++)
+        {
+            String usuario = (String) this.model.getValueAt(i, 0);
+            String nombre = (String) this.model.getValueAt(i, 1);
+            String mail = (String) this.model.getValueAt(i, 2);
+            String pass = (String) this.model.getValueAt(i, 3);
+            this.usuarios.add(new Usuario(usuario,nombre,mail,pass));
+        }
     }
 
     public int sizeU() {
@@ -750,6 +737,10 @@ public class JLogin extends JFrame implements ActionListener
         return usuarios.remove(index);
     }
 
+    public void clear() {
+        usuarios.clear();
+    }
+    
     public void checkFields()
     {
         String user = textfieldUser.getText();

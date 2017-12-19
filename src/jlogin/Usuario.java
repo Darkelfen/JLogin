@@ -10,12 +10,12 @@ package jlogin;
  * @author usuario
  */
 public class Usuario {
-    private String nombre;
     private String usuario;
-    private String pass;
+    private String nombre;
     private String mail;
+    private String pass;
 
-    public Usuario(String nombre, String usuario, String pass, String mail) {
+    public Usuario(String usuario, String nombre, String mail, String pass) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.pass = pass;
