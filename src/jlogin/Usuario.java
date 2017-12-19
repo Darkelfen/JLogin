@@ -5,11 +5,13 @@
  */
 package jlogin;
 
+import java.io.Serializable;
+
 /**
  *
  * @author usuario
  */
-public class Usuario implements serializable{
+public class Usuario implements Serializable{
     private String usuario;
     private String nombre;
     private String mail;
