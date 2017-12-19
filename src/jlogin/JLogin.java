@@ -207,8 +207,7 @@ public class JLogin extends JFrame implements ActionListener
                 //String nombre = textfieldNombreReal.getText();
                 //String pass = textfieldPass.getText();
                 //String email = textfieldEmail.getText();
-                for(int i=0;i<this.usuarios.size();i++)
-                {
+                
                     try
                     {       
 
@@ -223,7 +222,7 @@ public class JLogin extends JFrame implements ActionListener
                     {
                         System.out.println("No se ha podido ingresar correctamente.");
                     }
-                }
+                
                 saveUsuarios();
                 addUserWindow.dispose();
                 JFrame meme = openWindow();
@@ -233,7 +232,17 @@ public class JLogin extends JFrame implements ActionListener
         
         if (e.getSource() == this.eliminarUsuario)
         {
-           // this.table.getModel()).removeRow(this.table.getRowSelected());
+           
+
+                        
+                DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+                int[] rows = table.getSelectedRows();
+                for(int i=0;i<rows.length;i++){
+                  model.removeRow(rows[i]-i);
+                }
+             
+                saveUsuarios();
+            
         }
         if (e.getSource() == this.cambiarContraseña)
         {
