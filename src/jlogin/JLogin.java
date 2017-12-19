@@ -145,7 +145,7 @@ public class JLogin extends JFrame implements ActionListener
         
         super.getContentPane().add(panel);
         
-        this.usuarios = loadUsuarios();
+        loadUsuarios();
         
     }
     
@@ -216,8 +216,8 @@ public class JLogin extends JFrame implements ActionListener
                         String nombre = textfieldNombreReal.getText();
                         String pass = textfieldPass.getText();
                         String email = textfieldEmail.getText();
-                         this.usuarios.add(new Usuario(user,nombre,email,pass));
-                         System.out.println("Participante ingresad@ correctamente.");
+                        System.out.println("Participante ingresad@ correctamente.");
+                        model.addRow(new String[] {user, nombre, email, pass});
                     } 
                     catch (Exception er)
                     {
@@ -313,14 +313,6 @@ public class JLogin extends JFrame implements ActionListener
 
         // tablemodel
         model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
-        model.addRow(new String[] {"Admin", "Administrador", "a@a.com", "Password"});
-        for (int i = 0; i < this.usuarios.size(); i++)
-        {
-            model.addRow(new String[] { usuarios.get(i).getUsuario(), 
-                usuarios.get(i).getNombre(), 
-                usuarios.get(i).getMail(),
-                usuarios.get(i).getPass()});
-        }
         /*
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
@@ -701,11 +693,17 @@ public class JLogin extends JFrame implements ActionListener
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         return frame;
      }
-    public ArrayList<Usuario> loadUsuarios ()
+    public void loadUsuarios ()
     {
-        ArrayList<Usuario> a;
-        a = new ArrayList<Usuario> ();
-        return a;
+        this.usuarios = new ArrayList<Usuario>();
+        // Aca debe cargar al arraylist los usuarios que habían en el archivo
+        for (int i = 0; i < this.usuarios.size(); i++)
+        {
+            model.addRow(new String[] { usuarios.get(i).getUsuario(), 
+                usuarios.get(i).getNombre(), 
+                usuarios.get(i).getMail(),
+                usuarios.get(i).getPass()});
+        }
     }
 
     public void saveUsuarios ()
@@ -719,6 +717,7 @@ public class JLogin extends JFrame implements ActionListener
             String pass = (String) this.model.getValueAt(i, 3);
             this.usuarios.add(new Usuario(usuario,nombre,mail,pass));
         }
+        //Aca debe guardar el archivo con los usuarios
     }
 
     public int sizeU() {
@@ -740,7 +739,7 @@ public class JLogin extends JFrame implements ActionListener
     public void clear() {
         usuarios.clear();
     }
-    
+ 
     public void checkFields()
     {
         String user = textfieldUser.getText();
