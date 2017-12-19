@@ -325,8 +325,14 @@ public class JLogin extends JFrame implements ActionListener
         buttonPanel.add(agregarUsuario);
 
         // tablemodel
-        model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
-        /*
+        model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }};
+        /*t
         Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
         { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
         Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
