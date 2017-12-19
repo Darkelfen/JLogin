@@ -443,8 +443,9 @@ public class JLogin extends JFrame implements ActionListener
         formulario.setLayout(new GridLayout(2, 2, 10, 10));
 
         formulario.add(banner2);
-        formulario.add(banner3);
         formulario.add(labelD);
+        formulario.add(banner3);
+        
         formulario.add(labelD2);
         
         frame.add(formulario,BorderLayout.CENTER);
@@ -584,6 +585,7 @@ public class JLogin extends JFrame implements ActionListener
         return frame;
      }
      
+     
      JFrame MostrarInfo()
      {
         ImageIcon image = new ImageIcon("banner.png");
@@ -670,7 +672,7 @@ public class JLogin extends JFrame implements ActionListener
         JButton cambiarContraseña = new JButton("Cambiar Contraseña");
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
-        agregarUsuario2.setForeground(Color.WHITE);
+        cambiarContraseña.setForeground(Color.WHITE);
         
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
@@ -697,6 +699,35 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.add(banner);
         PanelBanner.setBackground(new Color(190, 11, 103));
         frame.add(PanelBanner,BorderLayout.PAGE_START);
+        // tablemodel
+        model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
+        /*
+        Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
+        { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
+        Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
+        */
+        table = new JTable(model);
+
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            // do some actions here, for example
+            // print first column value from selected row}
+            if (table.getSelectedRow() > -1)
+            {
+                editarUsuario.setEnabled(true);
+                eliminarUsuario.setEnabled(true);
+            }
+            else
+            {
+                editarUsuario.setEnabled(false);
+                eliminarUsuario.setEnabled(false);
+            }
+        }
+        });
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        frame.add(scrollPane, BorderLayout.CENTER);
         return frame;
      }
     public void loadUsuarios ()
