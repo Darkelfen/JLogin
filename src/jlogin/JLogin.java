@@ -202,7 +202,6 @@ public class JLogin extends JFrame implements ActionListener
         
         if( e.getSource() == this.agregarUsuario2)
         {
-<<<<<<< HEAD
                 //Añadir usuario acá
                 //String user = textfieldUser.getText();
                 //String nombre = textfieldNombreReal.getText();
@@ -211,50 +210,24 @@ public class JLogin extends JFrame implements ActionListener
                 
                     try
                     {       
-=======
-            try
-            {       
->>>>>>> d4ee4234eb452f62a027c604b547703a8d48c01c
 
-                String user = textfieldUser.getText();
-                String nombre = textfieldNombreReal.getText();
-                String email = textfieldEmail.getText();
-                String pass = textfieldPass.getText();
-                /*
-                for (int i = 0; i < this.usuarios.size(); i++)
-                {
-                    if (usuarios.get(i).getUsuario().equals(user) || usuarios.get(i).getMail().equals(email))
+                        String user = textfieldUser.getText();
+                        String nombre = textfieldNombreReal.getText();
+                        String pass = textfieldPass.getText();
+                        String email = textfieldEmail.getText();
+                         this.usuarios.add(new Usuario(user,nombre,pass,email));
+                         System.out.println("Participante ingresad@ correctamente.");
+                    } 
+                    catch (Exception er)
                     {
-                        JOptionPane.showMessageDialog(this, "Error", "JLogin", JOptionPane.ERROR_MESSAGE);
-                        break;
+                        System.out.println("No se ha podido ingresar correctamente.");
                     }
-                    else
-                    {
-                        this.usuarios.add(new Usuario(user,nombre,email,pass));
-                        break;
-                    }
-<<<<<<< HEAD
                 
                 saveUsuarios();
                 addUserWindow.dispose();
                 JFrame meme = openWindow();
                 meme.setVisible(true);
                 this.dispose();
-=======
-                }
-                */
-                this.usuarios.add(new Usuario(user,nombre,email,pass));
-            } 
-            catch (Exception er)
-            {
-                System.out.println("No se ha podido ingresar correctamente.");
-            }
-            saveUsuarios();
-            addUserWindow.dispose();
-            JFrame meme = openWindow();
-            meme.setVisible(true);
-            this.dispose();
->>>>>>> d4ee4234eb452f62a027c604b547703a8d48c01c
         }
         
         if (e.getSource() == this.eliminarUsuario)
