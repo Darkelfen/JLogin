@@ -48,6 +48,7 @@ public class JLogin extends JFrame implements ActionListener
     private JButton agregarUsuario;
     private JButton agregarUsuario2;
     private JButton cambiarContraseña;
+    private JButton regresar;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
     
@@ -202,7 +203,12 @@ public class JLogin extends JFrame implements ActionListener
             JLogin momo = new JLogin();
             momo.setVisible(true);
         }
-        
+        if( e.getSource() == this.regresar)
+        {
+            mainWindow.dispose();
+            JFrame momo = openWindow();
+            momo.setVisible(true);
+        }
         if( e.getSource() == this.editarUsuario )
         {
 
@@ -730,6 +736,14 @@ public class JLogin extends JFrame implements ActionListener
         
         JScrollPane scrollPane = new JScrollPane(table);
         frame.add(scrollPane, BorderLayout.CENTER);
+        
+        this.regresar = new JButton("Volver");
+        regresar.addActionListener(this);
+        regresar.setBackground(Color.BLUE);
+        regresar.setForeground(Color.WHITE);
+        
+
+        frame.add(regresar,BorderLayout.SOUTH);
         loadUsuarios();
         
         return frame;
