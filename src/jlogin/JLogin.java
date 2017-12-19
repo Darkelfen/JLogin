@@ -6,8 +6,15 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -67,7 +74,7 @@ public class JLogin extends JFrame implements ActionListener
         
         super("Formulario de Inicio de Sesión");
        
-        super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         super.setSize(900, 600);
         super.setMinimumSize(new Dimension(900, 400));
 
@@ -146,7 +153,6 @@ public class JLogin extends JFrame implements ActionListener
         super.getContentPane().add(panel);
         
         loadUsuarios();
-        
     }
     
     @Override
@@ -216,8 +222,8 @@ public class JLogin extends JFrame implements ActionListener
                         String nombre = textfieldNombreReal.getText();
                         String pass = textfieldPass.getText();
                         String email = textfieldEmail.getText();
-                        System.out.println("Participante ingresad@ correctamente.");
                         model.addRow(new String[] {user, nombre, email, pass});
+                        System.out.println("Participante ingresad@ correctamente.");
                     } 
                     catch (Exception er)
                     {
@@ -695,7 +701,7 @@ public class JLogin extends JFrame implements ActionListener
      }
     public void loadUsuarios ()
     {
-        this.usuarios = new ArrayList<Usuario>();
+        this.usuarios = this.leerArchivoLista();
         // Aca debe cargar al arraylist los usuarios que habían en el archivo
         for (int i = 0; i < this.usuarios.size(); i++)
         {
@@ -708,7 +714,11 @@ public class JLogin extends JFrame implements ActionListener
 
     public void saveUsuarios ()
     {
-        this.usuarios.clear();
+        this.usuarios = new ArrayList<Usuario>();
+        
+        if (this.model.getRowCount() > -1)
+        {
+        
         for (int i=0; i < this.model.getRowCount(); i++)
         {
             String usuario = (String) this.model.getValueAt(i, 0);
@@ -716,8 +726,14 @@ public class JLogin extends JFrame implements ActionListener
             String mail = (String) this.model.getValueAt(i, 2);
             String pass = (String) this.model.getValueAt(i, 3);
             this.usuarios.add(new Usuario(usuario,nombre,mail,pass));
+            System.out.println("Usuario añadido");
         }
         //Aca debe guardar el archivo con los usuarios
+        user2Text();
+        
+        } else {
+            System.out.println("Error leyendo los usuarios de la tabla");
+        }
     }
 
     public int sizeU() {
@@ -736,10 +752,6 @@ public class JLogin extends JFrame implements ActionListener
         return usuarios.remove(index);
     }
 
-    public void clear() {
-        usuarios.clear();
-    }
- 
     public void checkFields()
     {
         String user = textfieldUser.getText();
@@ -755,4 +767,54 @@ public class JLogin extends JFrame implements ActionListener
             agregarUsuario2.setEnabled(false);
         }
     }
+    
+    public ArrayList<Usuario> leerArchivoLista(){
+        ArrayList<Usuario> lista = new ArrayList();
+        Scanner file = null;
+        try{
+            file = new Scanner(new File("Usuario.gj")); 
+            System.out.println("File found");
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        if(file != null){
+            //System.out.println(""+file.hasNext());
+            while(file.hasNext()){
+                String user = file.next();
+                String nombre = file.next();
+                String mail = file.next();
+                String pass = file.next();
+
+                //System.out.println("" + cat + codigo + nombre + precio);
+                Usuario usuario = new Usuario(user,nombre,mail,pass);
+                int checker = 0;
+                for(int i = 0; i < lista.size(); i++){
+                    Usuario check = lista.get(i);
+                    if(check.getUsuario() == usuario.getUsuario() || check.getMail() == usuario.getMail()){
+                        //System.out.println("Codigo duplicado: " + check.getCodigo() + " - " + check.getNombre() + " / " + objeto.getCodigo() + " - " + objeto.getNombre());
+                        checker = 1;
+                    }
+                }
+                if(checker == 0) lista.add(usuario);
+                //lista.add(objeto);
+            }
+            file.close();
+        }
+        return lista;
+    }
+    
+    public void user2Text(){
+        try{
+            FileOutputStream fileOut = new FileOutputStream("Usuario.gj");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this.usuarios);
+            out.close();
+            fileOut.close();
+            System.out.println("Lista de usuarios ha sido guardada en 'Usuario.gj'");
+        }
+        catch(IOException i){
+            i.printStackTrace();
+        }
+    }    
 }

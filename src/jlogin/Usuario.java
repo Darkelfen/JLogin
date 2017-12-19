@@ -9,7 +9,7 @@ package jlogin;
  *
  * @author usuario
  */
-public class Usuario {
+public class Usuario implements serializable{
     private String usuario;
     private String nombre;
     private String mail;
