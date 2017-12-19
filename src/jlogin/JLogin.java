@@ -437,8 +437,9 @@ public class JLogin extends JFrame implements ActionListener
         formulario.setLayout(new GridLayout(2, 2, 10, 10));
 
         formulario.add(banner2);
-        formulario.add(banner3);
         formulario.add(labelD);
+        formulario.add(banner3);
+        
         formulario.add(labelD2);
         
         frame.add(formulario,BorderLayout.CENTER);
@@ -577,6 +578,7 @@ public class JLogin extends JFrame implements ActionListener
                  
         return frame;
      }
+     
      
      JFrame MostrarInfo()
      {
