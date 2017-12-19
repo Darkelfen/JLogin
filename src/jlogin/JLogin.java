@@ -207,7 +207,23 @@ public class JLogin extends JFrame implements ActionListener
                 //String nombre = textfieldNombreReal.getText();
                 //String pass = textfieldPass.getText();
                 //String email = textfieldEmail.getText();
-            
+                for(int i=0;i<this.usuarios.size();i++)
+                {
+                    try
+                    {       
+
+                        String user = textfieldUser.getText();
+                        String nombre = textfieldNombreReal.getText();
+                        String pass = textfieldPass.getText();
+                        String email = textfieldEmail.getText();
+                         this.usuarios.add(new Usuario(user,nombre,pass,email));
+                         System.out.println("Participante ingresad@ correctamente.");
+                    } 
+                    catch (Exception er)
+                    {
+                        System.out.println("No se ha podido ingresar correctamente.");
+                    }
+                }
                 saveUsuarios();
                 addUserWindow.dispose();
                 JFrame meme = openWindow();
@@ -608,13 +624,22 @@ public class JLogin extends JFrame implements ActionListener
         labelPass.setPreferredSize(new Dimension(100, 2));
         
         Pass.add(labelPass, BorderLayout.LINE_START);
-
+        
+        
+        
+        
+        
+        
+        
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(4, 1, 10, 10));
+        formulario.setLayout(new GridLayout(4, 2, 10, 10));
         formulario.add(User);
         formulario.add(Nombre);
         formulario.add(email);
         formulario.add(Pass);
+        
+        
+        
         
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
