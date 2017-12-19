@@ -730,6 +730,8 @@ public class JLogin extends JFrame implements ActionListener
         
         JScrollPane scrollPane = new JScrollPane(table);
         frame.add(scrollPane, BorderLayout.CENTER);
+        loadUsuarios();
+        
         return frame;
      }
     public void loadUsuarios ()
