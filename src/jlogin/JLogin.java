@@ -829,7 +829,7 @@ public class JLogin extends JFrame implements ActionListener
                 String mail = file.nextLine();
                 String pass = file.nextLine();
 
-                System.out.println(""+ user + nombre + mail + pass);
+                System.out.println(user +" "+ nombre +" "+ mail +" "+ pass);
                 Usuario usuario = new Usuario(user,nombre,mail,pass);
                 int checker = 0;
                 for(int i = 0; i < lista.size(); i++){
