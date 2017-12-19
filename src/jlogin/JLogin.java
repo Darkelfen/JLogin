@@ -64,6 +64,7 @@ public class JLogin extends JFrame implements ActionListener
     private JLabel errorMsgP;
     private JFrame mainWindow;
     private JFrame addUserWindow;
+    private JFrame editUserWindow;
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
@@ -200,14 +201,14 @@ public class JLogin extends JFrame implements ActionListener
         if( e.getSource() == this.cerrarSesion )
         {
             mainWindow.dispose();
-            JLogin momo = new JLogin();
-            momo.setVisible(true);
+            JLogin window = new JLogin();
+            window.setVisible(true);
         }
-        if( e.getSource() == this.regresar)
+        if( e.getSource() == this.regresar )
         {
-            mainWindow.dispose();
-            JFrame momo = openWindow();
-            momo.setVisible(true);
+            editUserWindow.dispose();
+            mainWindow = openWindow();
+            mainWindow.setVisible(true);
         }
         if( e.getSource() == this.editarUsuario )
         {
@@ -391,8 +392,8 @@ public class JLogin extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 mainWindow.dispose();
-                JFrame memu = EditUser();
-                memu.setVisible(true);
+                editUserWindow = EditUser();
+                editUserWindow.setVisible(true);
             }
         };
         this.editarUsuario.addActionListener(editarUsuario);
@@ -430,7 +431,7 @@ public class JLogin extends JFrame implements ActionListener
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
     }
     
-     JFrame NewWindow()
+    JFrame NewWindow()
     {
         ImageIcon image = new ImageIcon("banner.png");
         ImageIcon image2 = new ImageIcon("meme.jpg");
