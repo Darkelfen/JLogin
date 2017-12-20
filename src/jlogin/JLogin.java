@@ -72,6 +72,7 @@ public class JLogin extends JFrame implements ActionListener
     private JLabel errorMsgP;
     private JFrame mainWindow,addUserWindow,editUserWindow,passEditWindow,infoWindow;
     
+    private JLogin window;
     
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
@@ -80,6 +81,8 @@ public class JLogin extends JFrame implements ActionListener
     private DefaultTableModel model;
     private ArrayList<Usuario> usuarios;
 
+    private int currentRow;
+    
     public JLogin()
     {   
         
@@ -211,7 +214,7 @@ public class JLogin extends JFrame implements ActionListener
         if( e.getSource() == this.cerrarSesion )
         {
             mainWindow.dispose();
-            JLogin window = new JLogin();
+            window = new JLogin();
             window.setVisible(true);
         }
         if( e.getSource() == this.regresar )
@@ -407,7 +410,8 @@ public class JLogin extends JFrame implements ActionListener
         public void valueChanged(ListSelectionEvent event) {
             // do some actions here, for example
             // print first column value from selected row}
-            if (table.getSelectedRow() > -1)
+            currentRow = table.getSelectedRow();
+            if (currentRow > -1)
             {
                 editarUsuario.setEnabled(true);
                 eliminarUsuario.setEnabled(true);
@@ -464,8 +468,8 @@ public class JLogin extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 mainWindow.dispose();
-                JLogin momo = new JLogin();
-                momo.setVisible(true); 
+                window = new JLogin();
+                window.setVisible(true); 
                 saveUsuarios();
             }
         };
