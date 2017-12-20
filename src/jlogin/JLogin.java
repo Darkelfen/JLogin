@@ -50,6 +50,10 @@ public class JLogin extends JFrame implements ActionListener
     private JButton agregarUsuario2;
     private JButton cambiarContraseña;
     private JButton regresar;
+    
+    //Volver de Informacion de Usuario
+    private JButton volver;
+    //Logeo
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
     
@@ -683,11 +687,15 @@ public class JLogin extends JFrame implements ActionListener
               }
         
         
+        JPanel panelVolver = new JPanel();
         
+        JButton volver = new JButton("Volver");
+        volver.addActionListener(this);
+        volver.setBackground(Color.BLUE);
+        volver.setForeground(Color.WHITE);
+        volver.setPreferredSize(new Dimension(100,24));
         
-        
-        
-        
+        panelVolver.add(volver);
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(4, 2, 10, 10));
         formulario.add(User);
@@ -704,7 +712,7 @@ public class JLogin extends JFrame implements ActionListener
         centro.add(formulario);
         
         frame.add(centro);
-        
+        frame.add(panelVolver,BorderLayout.SOUTH);
        
         
         
