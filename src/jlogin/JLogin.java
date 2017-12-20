@@ -290,7 +290,7 @@ public class JLogin extends JFrame implements ActionListener
             try
             {
                 String pass = textfieldPass2.getText();
-                model.setValueAt(pass,currentRow,3);
+                model.setValueAt(pass,getUserRow(),3);
                 System.out.println("Contraseña editada correctamente.");
             } 
             catch (Exception er)
@@ -1072,8 +1072,8 @@ public class JLogin extends JFrame implements ActionListener
     {
         String pass1 = textfieldPass1.getText();
         String pass2 = textfieldPass2.getText();
-        String pass3 = (String) this.model.getValueAt(currentRow, 3);
-        if (!pass1.equals(pass3) && !pass2.equals(""))
+        String pass3 = (String) this.model.getValueAt(getUserRow(), 3);
+        if (pass1.equals(pass3) && !pass2.equals(""))
         {
             cambiarContraseña.setEnabled(true);
         }
@@ -1119,6 +1119,21 @@ public class JLogin extends JFrame implements ActionListener
             file.close();
         }
         return lista;
+    }
+    
+    public int getUserRow(){
+        int datRow = 0;
+        for (int i=0; i < this.model.getRowCount(); i++)
+        {
+            String usuario = (String) this.model.getValueAt(i, 0);
+            if(usuarioL.equals(usuario))
+            {    
+                datRow = i;
+                System.out.println("Usuario encontrado");
+                break;
+            }
+        }
+        return datRow;
     }
     
     public void user2Text(){
