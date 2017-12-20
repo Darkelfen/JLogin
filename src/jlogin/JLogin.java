@@ -364,8 +364,6 @@ public class JLogin extends JFrame implements ActionListener
             
         this.barraMenu.add(this.menuAyuda);
             this.menuAyuda.add(this.equipoDesarrollo);
-        
-        setJMenuBar(this.barraMenu);
          
         this.programaEventos();
         
@@ -373,17 +371,19 @@ public class JLogin extends JFrame implements ActionListener
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
-        frame.add(barraMenu,BorderLayout.PAGE_START);
+        
         JLabel banner = new JLabel(image);
-        JPanel upperPanel = new JPanel (new BorderLayout());
-        JPanel upperPanel2 = new JPanel (new BorderLayout());
-        JPanel upperPanel3 = new JPanel (new BorderLayout());
+        JPanel upperPanel = new JPanel ();
+        JPanel upperPanel2 = new JPanel ();
+        JPanel upperPanel3 = new JPanel ();
         upperPanel.setLayout(new GridLayout(1, 1, 0, 0));
         
         upperPanel3.add(banner);
         
         upperPanel.add(upperPanel3);
         
+        frame.setJMenuBar(barraMenu);
+        frame.add(upperPanel,BorderLayout.NORTH);
         upperPanel3.setBackground( new Color(190, 11, 103) );
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 2, 0, 0));
