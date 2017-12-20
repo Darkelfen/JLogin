@@ -287,53 +287,20 @@ public class JLogin extends JFrame implements ActionListener
         }
         if (e.getSource() == this.cambiarContraseña)
         {
-              for(Usuario U: usuarios)
-              {
-                 if(usuarioL.equals(((Usuario)U).getUsuario()))
-                 {
-                     System.out.println("Usuario Encontrado");
-                     System.out.println(passL);
-                     System.out.println(((Usuario)U).getPass());
-                     if(passL.equals(((Usuario)U).getPass()))
-                     {
-                         System.out.println("Contraseña correcta");
-                         if(Arrays.toString(this.textfieldPass2.getPassword()).equals(""))
-                         {
-                             System.out.println("No se puede guardar");
-                         }
-                         else
-                         {
-                             try
-                             {
-                                 //AGREGAR GUARDADO PERMANENTE Y QUE SE CAMBIE EN LA TABLA
-                                 //ARREGLAR DISPOSE
-                                System.out.println("Contraseña Guardada Corectamente");
-                                U.setPass(this.textfieldPass2.getText());
-                                System.out.println(this.textfieldPass2.getText());
-                                System.out.println(U.getNombre()+(" ")+U.getUsuario()+(" ")+U.getMail()+(" ")+U.getPass());
-                                
-                                passEditWindow.dispose();
-                                mainWindow = openWindow();
-                                mainWindow.setVisible(true);
-                             }
-                             catch(Exception er)
-                             {
-                                 System.out.println("Error");
-                             }
-                             
-                         }
-                     }
-                     else
-                     {
-                         System.out.println("Contraseña incorrecta");
-                     }
-                     
-                 }
-                 else
-                 {
-                     System.out.println("Usuario No Encontrado");
-                 }
-              }
+            try
+            {
+                String pass = textfieldPass2.getText();
+                model.setValueAt(pass,currentRow,3);
+                System.out.println("Contraseña editada correctamente.");
+            } 
+            catch (Exception er)
+            {
+                System.out.println("No se ha podido editar la contraseña correctamente.");
+            }
+            saveUsuarios();
+            passEditWindow.dispose();
+            mainWindow = openWindow();
+            mainWindow.setVisible(true);
         }
         
     }
@@ -806,6 +773,22 @@ public class JLogin extends JFrame implements ActionListener
         labelContrasena1.setPreferredSize(new Dimension(200, 24));
         this.textfieldPass1 = new JPasswordField();
         textfieldPass1.setPreferredSize(new Dimension(100, 24));
+        textfieldPass1.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields3();
+          }
+        });        
         primeraFila.add(labelContrasena1,BorderLayout.LINE_START);
         primeraFila.add(textfieldPass1, BorderLayout.AFTER_LINE_ENDS);
         
@@ -814,6 +797,22 @@ public class JLogin extends JFrame implements ActionListener
         labelContrasena2.setPreferredSize(new Dimension(200, 24));
         this.textfieldPass2 = new JPasswordField();
         textfieldPass2.setPreferredSize(new Dimension(100, 24));
+        textfieldPass2.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields3();
+          }
+        });        
         segundaFila.add(labelContrasena2, BorderLayout.LINE_START);
         segundaFila.add(textfieldPass2, BorderLayout.CENTER);
         
@@ -1067,6 +1066,20 @@ public class JLogin extends JFrame implements ActionListener
         else
         {
             editarUsuario2.setEnabled(false);
+        }
+    }
+    public void checkFields3()
+    {
+        String pass1 = textfieldPass1.getText();
+        String pass2 = textfieldPass2.getText();
+        String pass3 = (String) this.model.getValueAt(currentRow, 3);
+        if (!pass1.equals(pass3) && !pass2.equals(""))
+        {
+            cambiarContraseña.setEnabled(true);
+        }
+        else
+        {
+            cambiarContraseña.setEnabled(false);
         }
     }
     
