@@ -46,10 +46,10 @@ public class JLogin extends JFrame implements ActionListener
     private JButton cerrarSesion;
     private JButton eliminarUsuario;
     private JButton editarUsuario;
+    private JButton editarUsuario2;
     private JButton agregarUsuario;
     private JButton agregarUsuario2;
     private JButton cambiarContraseña;
-    private JButton regresar;
     
     //Volver de Informacion de Usuario
     private JButton volver;
@@ -217,24 +217,35 @@ public class JLogin extends JFrame implements ActionListener
             window = new JLogin();
             window.setVisible(true);
         }
-        if( e.getSource() == this.regresar )
-        {
-            editUserWindow.dispose();
-            mainWindow = openWindow();
-            mainWindow.setVisible(true);
-        }
+
         if( e.getSource() == this.volver )
         {
             infoWindow.dispose();
             mainWindow = openWindow();
             mainWindow.setVisible(true);
         }
-        if( e.getSource() == this.editarUsuario )
+        if( e.getSource() == this.editarUsuario2 )
         {
-            String usuario = (String) this.model.getValueAt(currentRow,0);
-            String nombre = (String) this.model.getValueAt(currentRow,0);
-            String mail = (String) this.model.getValueAt(currentRow,0);
-            String pass = (String) this.model.getValueAt(currentRow,0);
+            try
+            {
+                String user = textfieldUser.getText();
+                String nombre = textfieldNombreReal.getText();
+                String pass = textfieldPass.getText();
+                String email = textfieldEmail.getText();
+                model.setValueAt(user,currentRow,0);
+                model.setValueAt(nombre,currentRow,1);
+                model.setValueAt(pass,currentRow,2);
+                model.setValueAt(email,currentRow,3);
+                System.out.println("Participante editado correctamente.");
+            } 
+            catch (Exception er)
+            {
+                System.out.println("No se ha podido editar correctamente.");
+            }
+            saveUsuarios();
+            editUserWindow.dispose();
+            mainWindow = openWindow();
+            mainWindow.setVisible(true);
             
         }
         
@@ -263,9 +274,8 @@ public class JLogin extends JFrame implements ActionListener
                 
                 saveUsuarios();
                 addUserWindow.dispose();
-                JFrame meme = openWindow();
-                meme.setVisible(true);
-                this.dispose();
+                mainWindow = openWindow();
+                mainWindow.setVisible(true);
         }
         
         if (e.getSource() == this.eliminarUsuario)
@@ -827,7 +837,9 @@ public class JLogin extends JFrame implements ActionListener
      }
      JFrame EditUser()
      {
+         String text = "";
         ImageIcon image = new ImageIcon("banner.png");
+         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
@@ -837,44 +849,131 @@ public class JLogin extends JFrame implements ActionListener
         PanelBanner.add(banner);
         PanelBanner.setBackground(new Color(190, 11, 103));
         frame.add(PanelBanner,BorderLayout.PAGE_START);
-        // tablemodel
-        model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0);
-        /*
-        Object rowData[][] = { { "Admin", "Administrador", "a@a" , "Admin1234"},
-        { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4" } };
-        Object columnNames[] = { "Usuario", "Nombre", "Email", "Contraseña" };
-        */
-        table = new JTable(model);
+        
+        JPanel User = new JPanel(new BorderLayout());
+        JLabel labelUser = new JLabel("Nombre de usuario");
+        labelUser.setPreferredSize(new Dimension(120, 24));
+        this.textfieldUser = new JTextField();
+        textfieldUser.setPreferredSize(new Dimension(100, 24));
+        User.add(labelUser, BorderLayout.LINE_START);
+        User.add(textfieldUser, BorderLayout.CENTER);
+        text = (String) this.model.getValueAt(currentRow, 0);
+        textfieldUser.setText(text);
+        textfieldUser.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
 
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            // do some actions here, for example
-            // print first column value from selected row}
-            if (table.getSelectedRow() > -1)
-            {
-                editarUsuario.setEnabled(true);
-                eliminarUsuario.setEnabled(true);
-            }
-            else
-            {
-                editarUsuario.setEnabled(false);
-                eliminarUsuario.setEnabled(false);
-            }
-        }
+          public void changed() {
+               checkFields2();
+          }
+        });
+
+        JPanel Nombre = new JPanel(new BorderLayout());
+        JLabel labelNombre = new JLabel("Nombre Real");
+        labelNombre.setPreferredSize(new Dimension(120, 24));
+        this.textfieldNombreReal = new JTextField();
+        textfieldNombreReal.setPreferredSize(new Dimension(100, 24));
+        Nombre.add(labelNombre, BorderLayout.LINE_START);
+        Nombre.add(textfieldNombreReal, BorderLayout.CENTER);
+        text = (String) this.model.getValueAt(currentRow, 1);
+        textfieldNombreReal.setText(text);
+        textfieldNombreReal.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields2();
+          }
         });
         
-        JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.CENTER);
-        
-        this.regresar = new JButton("Volver");
-        regresar.addActionListener(this);
-        regresar.setBackground(Color.BLUE);
-        regresar.setForeground(Color.WHITE);
-        
+        JPanel email = new JPanel(new BorderLayout());
+        JLabel labelEmail = new JLabel("Email");
+        labelEmail.setPreferredSize(new Dimension(120, 10));
+        this.textfieldEmail = new JTextField();
+        textfieldEmail.setPreferredSize(new Dimension(100, 2));
+        email.add(labelEmail, BorderLayout.LINE_START);
+        email.add(textfieldEmail, BorderLayout.CENTER);
+         
+        text = (String) this.model.getValueAt(currentRow, 2);
+        textfieldEmail.setText(text);
+        textfieldEmail.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
 
-        frame.add(regresar,BorderLayout.SOUTH);
-        loadUsuarios();
+          public void changed() {
+               checkFields2();
+          }
+        });
+
+        JPanel Pass = new JPanel(new BorderLayout());
+        JLabel labelPass = new JLabel("Contraseña");
+        labelPass.setPreferredSize(new Dimension(100, 2));
+        this.textfieldPass = new JPasswordField();
+        textfieldPass.setPreferredSize(new Dimension(400, 2));
+        Pass.add(labelPass, BorderLayout.LINE_START);
+        Pass.add(textfieldPass, BorderLayout.CENTER);
+        text = (String) this.model.getValueAt(currentRow, 3);
+        textfieldPass.setText(text);
+        textfieldPass.getDocument().addDocumentListener(new DocumentListener() {
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void removeUpdate(DocumentEvent e) {
+            changed();
+          }
+          public void insertUpdate(DocumentEvent e) {
+            changed();
+          }
+
+          public void changed() {
+               checkFields2();
+          }
+        });
+
+        this.editarUsuario2 = new JButton("Editar");
+        editarUsuario2.addActionListener(this);
+        editarUsuario2.setBackground(Color.BLUE);
+        editarUsuario2.setForeground(Color.WHITE);
+        editarUsuario2.setEnabled(false);
+        
+        JPanel formulario = new JPanel();
+        formulario.setLayout(new GridLayout(5, 1, 10, 10));
+        formulario.add(User);
+        formulario.add(Nombre);
+        formulario.add(email);
+        formulario.add(Pass);
+        formulario.add(editarUsuario2,BorderLayout.SOUTH);
+        
+        JPanel centro = new JPanel();
+        centro.setBorder(new EmptyBorder(20, 20, 20, 20));
+        centro.add(formulario);
+        
+        frame.add(centro);
         
         return frame;
      }
@@ -952,6 +1051,22 @@ public class JLogin extends JFrame implements ActionListener
         else
         {
             agregarUsuario2.setEnabled(false);
+        }
+    }
+
+    public void checkFields2()
+    {
+        String user = textfieldUser.getText();
+        String nombre = textfieldNombreReal.getText();
+        String pass = textfieldPass.getText();
+        String email = textfieldEmail.getText();
+        if (!user.equals("") && !nombre.equals("") && !pass.equals("") && !email.equals(""))
+        {
+            editarUsuario2.setEnabled(true);
+        }
+        else
+        {
+            editarUsuario2.setEnabled(false);
         }
     }
     
