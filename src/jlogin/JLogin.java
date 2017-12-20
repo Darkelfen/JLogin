@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
@@ -51,6 +52,9 @@ public class JLogin extends JFrame implements ActionListener
     private JButton regresar;
     private JTextField textfieldNombre;
     private JPasswordField textfieldContrasena;
+    
+    private String usuarioL;
+    private String passL;
     
     private JTextField textfieldUser;
     private JTextField textfieldNombreReal;
@@ -166,7 +170,9 @@ public class JLogin extends JFrame implements ActionListener
         {
             String user = this.textfieldNombre.getText();
             String pass = this.textfieldContrasena.getText();
-            
+            usuarioL = this.textfieldNombre.getText();
+            passL = Arrays.toString(this.textfieldContrasena.getPassword());
+            //passL = this.textfieldPass.getText();
             if ( user.equals("") && pass.equals ("") )
             {
                 errorMsgU.setVisible(true);
@@ -254,7 +260,7 @@ public class JLogin extends JFrame implements ActionListener
         }
         if (e.getSource() == this.cambiarContraseña)
         {
-          
+              
         }
         
     }
@@ -615,43 +621,88 @@ public class JLogin extends JFrame implements ActionListener
         frame.add(PanelBanner,BorderLayout.PAGE_START);
         
         JPanel User = new JPanel(new BorderLayout());
-        JLabel labelUser = new JLabel("Nombre de usuario");
+        JLabel labelUser = new JLabel("Nombre de usuario : ");
+        
+        JPanel User1 = new JPanel(new BorderLayout());
+        JLabel labelUser1 = new JLabel();
         
         labelUser.setPreferredSize(new Dimension(120, 24));
-        
         User.add(labelUser, BorderLayout.LINE_START);
+        labelUser1.setPreferredSize(new Dimension(120, 24));
+        User1.add(labelUser1, BorderLayout.LINE_START);
+        
         
         JPanel Nombre = new JPanel(new BorderLayout());
-        JLabel labelNombre = new JLabel("Nombre Real");
+        JLabel labelNombre = new JLabel("Nombre Real : ");
+        
+        JPanel Nombre1 = new JPanel(new BorderLayout());
+        JLabel labelNombre1 = new JLabel();
         
         labelNombre.setPreferredSize(new Dimension(120, 24));
-        
         Nombre.add(labelNombre, BorderLayout.LINE_START);
+        
+         labelNombre1.setPreferredSize(new Dimension(120, 24));
+        Nombre1.add(labelNombre1, BorderLayout.LINE_START);
 
         JPanel email = new JPanel(new BorderLayout());
-        JLabel labelEmail = new JLabel("Email");
+        JLabel labelEmail = new JLabel("Email : ");
+        
+        JPanel email1 = new JPanel(new BorderLayout());
+        JLabel labelEmail1 = new JLabel();
         
         labelEmail.setPreferredSize(new Dimension(120, 10));
-        
         email.add(labelEmail, BorderLayout.LINE_START);
+        
+        labelEmail1.setPreferredSize(new Dimension(120, 10));
+        email1.add(labelEmail1, BorderLayout.LINE_START);
 
         JPanel Pass = new JPanel(new BorderLayout());
-        JLabel labelPass = new JLabel("Contraseña");
+        JLabel labelPass = new JLabel("Contraseña : ");
         labelPass.setPreferredSize(new Dimension(100, 2));
         Pass.add(labelPass, BorderLayout.LINE_START);
+        
+        JPanel Pass1 = new JPanel(new BorderLayout());
+        JLabel labelPass1 = new JLabel();
+        labelPass1.setPreferredSize(new Dimension(100, 2));
+        Pass1.add(labelPass1, BorderLayout.LINE_START);
 
+        
+         for(Usuario U: usuarios)
+              {
+                 if(usuarioL.equals(((Usuario)U).getUsuario()))
+                 {
+                     labelUser1.setText(((Usuario)U).getUsuario());
+                     labelNombre1.setText(((Usuario)U).getNombre());
+                     labelEmail1.setText(((Usuario)U).getMail());
+                     labelPass1.setText(((Usuario)U).getPass());
+                 }
+              }
+        
+        
+        
+        
+        
+        
+        
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(4, 2, 10, 10));
         formulario.add(User);
+        formulario.add(User1);
         formulario.add(Nombre);
+        formulario.add(Nombre1);
         formulario.add(email);
+        formulario.add(email1);
         formulario.add(Pass);
+        formulario.add(Pass1);
 
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
         
         frame.add(centro);
+        
+       
+        
         
         return frame;
      }
@@ -698,7 +749,31 @@ public class JLogin extends JFrame implements ActionListener
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
         
+        for(Usuario U: usuarios)
+              {
+                 if(usuarioL.equals(((Usuario)U).getUsuario()))
+                 {
+                     System.out.println("Usuario Encontrado");
+                     if(Arrays.toString(this.textfieldPass1.getPassword()).equals(((Usuario)U).getPass()))
+                     {
+                         System.out.println("Contraseña correcta");
+                         if(Arrays.toString(this.textfieldPass2.getPassword()).equals(""))
+                         {
+                             System.out.println("No se puede guardar");
+                         }
+                         else
+                         {
+                             U.setPass(Arrays.toString(this.textfieldPass2.getPassword()));
+                         }
+                     }
+                     
+                 }
+              }
+        
+        
         frame.add(centro);
+        
+        
         
         return frame;
      }
