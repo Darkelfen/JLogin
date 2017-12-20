@@ -231,7 +231,11 @@ public class JLogin extends JFrame implements ActionListener
         }
         if( e.getSource() == this.editarUsuario )
         {
-
+            String usuario = (String) this.model.getValueAt(currentRow,0);
+            String nombre = (String) this.model.getValueAt(currentRow,0);
+            String mail = (String) this.model.getValueAt(currentRow,0);
+            String pass = (String) this.model.getValueAt(currentRow,0);
+            
         }
         
         if( e.getSource() == this.agregarUsuario2)
