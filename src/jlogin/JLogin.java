@@ -49,25 +49,22 @@ public class JLogin extends JFrame implements ActionListener {
     private JButton editarUsuario2;
     private JButton agregarUsuario;
     private JButton agregarUsuario2;
-    private JButton cambiarContraseña;
-
-    //Volver de Informacion de Usuario
+    private JButton cambiarContrasena;
     private JButton volver;
+    
     //Logeo
-    private JTextField textfieldNombre;
-    private JPasswordField textfieldContrasena;
-
-    private String usuarioL;
-    private String passL;
-
+    private JTextField textfieldNombreUsuario; //Login
     private JTextField textfieldUser;
     private JTextField textfieldNombreReal;
     private JTextField textfieldEmail;
     private JPasswordField textfieldPass;
+    private JPasswordField textfieldPass1; //Cambiar Contraseña
+    private JPasswordField textfieldPass2; //Cambiar Contraseña
+    private JPasswordField textfieldContrasena; //Login
 
-    //CAMBIAR PASS
-    private JPasswordField textfieldPass1;
-    private JPasswordField textfieldPass2;
+    private String usuarioL;
+    private String passL;
+
     private JLabel errorMsgU;
     private JLabel errorMsgP;
     private JFrame mainWindow, addUserWindow, editUserWindow, passEditWindow, infoWindow;
@@ -101,11 +98,11 @@ public class JLogin extends JFrame implements ActionListener {
         JLabel labelNombre = new JLabel("Nombre de usuario");
         JLabel labelNombre2 = new JLabel("     ");
         labelNombre.setPreferredSize(new Dimension(120, 24));
-        this.textfieldNombre = new JTextField();
-        textfieldNombre.setPreferredSize(new Dimension(200, 24));
+        this.textfieldNombreUsuario = new JTextField();
+        textfieldNombreUsuario.setPreferredSize(new Dimension(200, 24));
 
         JPanel panelTextFieldNombre = new JPanel();
-        panelTextFieldNombre.add(textfieldNombre);
+        panelTextFieldNombre.add(textfieldNombreUsuario);
 
         primeraFila.add(labelNombre, BorderLayout.LINE_START);
         primeraFila.add(panelTextFieldNombre, BorderLayout.CENTER);
@@ -184,17 +181,17 @@ public class JLogin extends JFrame implements ActionListener {
 
         if (e.getSource() == this.iniciarSesion) {
             boolean usuarioExiste = false;
-            usuarioL = this.textfieldNombre.getText();
+            usuarioL = this.textfieldNombreUsuario.getText();
             passL = this.textfieldContrasena.getText();
             //passL = this.textfieldPass.getText();
             if (usuarioL.equals("") && passL.equals("")) {
                 errorMsgU.setVisible(true);
                 errorMsgP.setVisible(true);
-                textfieldNombre.requestFocus();
+                textfieldNombreUsuario.requestFocus();
             } else if (usuarioL.equals("")) {
                 errorMsgU.setVisible(true);
                 errorMsgU.setText("Ingrese Usuario");
-                textfieldNombre.requestFocus();
+                textfieldNombreUsuario.requestFocus();
             } else if (passL.equals("")) {
                 errorMsgP.setVisible(true);
                 errorMsgP.setText("Ingrese Contraseña");
@@ -290,7 +287,7 @@ public class JLogin extends JFrame implements ActionListener {
             model.removeRow(row);
             saveUsuarios();
         }
-        if (e.getSource() == this.cambiarContraseña) {
+        if (e.getSource() == this.cambiarContrasena) {
             try {
                 String pass = textfieldPass2.getText();
                 model.setValueAt(pass, getUserRow(), 3);
@@ -443,7 +440,7 @@ public class JLogin extends JFrame implements ActionListener {
         ActionListener infoUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainWindow.dispose();
-                infoWindow = MostrarInfo();
+                infoWindow = mostrarInfo();
                 infoWindow.setVisible(true);
             }
         };
@@ -452,7 +449,7 @@ public class JLogin extends JFrame implements ActionListener {
         ActionListener cambiarPass = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainWindow.dispose();
-                passEditWindow = CambiarPass();
+                passEditWindow = cambiarPass();
                 passEditWindow.setVisible(true);
             }
         };
@@ -461,7 +458,7 @@ public class JLogin extends JFrame implements ActionListener {
         ActionListener editarUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainWindow.dispose();
-                editUserWindow = EditUser();
+                editUserWindow = editUser();
                 editUserWindow.setVisible(true);
             }
         };
@@ -480,7 +477,7 @@ public class JLogin extends JFrame implements ActionListener {
         ActionListener agregarUsuario = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainWindow.dispose();
-                addUserWindow = AddUser();
+                addUserWindow = addUser();
                 addUserWindow.setVisible(true);
 
             }
@@ -490,14 +487,14 @@ public class JLogin extends JFrame implements ActionListener {
         ActionListener equipoDesarrollo = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainWindow.dispose();
-                JFrame meme = NewWindow();
+                JFrame meme = newWindow();
                 meme.setVisible(true);
             }
         };
         this.equipoDesarrollo.addActionListener(equipoDesarrollo);
     }
 
-    JFrame NewWindow() {
+    JFrame newWindow() {
         ImageIcon image = new ImageIcon("banner.png");
         ImageIcon image2 = new ImageIcon("meme.jpg");
         ImageIcon image3 = new ImageIcon("meme2.jpg");
@@ -532,7 +529,7 @@ public class JLogin extends JFrame implements ActionListener {
         return (frame);
     }
 
-    JFrame AddUser() {
+    JFrame addUser() {
         ImageIcon image = new ImageIcon("banner.png");
 
         JFrame frame = new JFrame();
@@ -672,7 +669,7 @@ public class JLogin extends JFrame implements ActionListener {
         return frame;
     }
 
-    JFrame MostrarInfo() {
+    JFrame mostrarInfo() {
         ImageIcon image = new ImageIcon("banner.png");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -773,7 +770,7 @@ public class JLogin extends JFrame implements ActionListener {
         return frame;
     }
 
-    JFrame CambiarPass() {
+    JFrame cambiarPass() {
         ImageIcon image = new ImageIcon("banner.png");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -837,16 +834,16 @@ public class JLogin extends JFrame implements ActionListener {
         segundaFila.add(labelContrasena2, BorderLayout.LINE_START);
         segundaFila.add(textfieldPass2, BorderLayout.CENTER);
 
-        this.cambiarContraseña = new JButton("Cambiar Contraseña");
-        cambiarContraseña.addActionListener(this);
-        cambiarContraseña.setBackground(Color.BLUE);
-        cambiarContraseña.setForeground(Color.WHITE);
+        this.cambiarContrasena = new JButton("Cambiar Contraseña");
+        cambiarContrasena.addActionListener(this);
+        cambiarContrasena.setBackground(Color.BLUE);
+        cambiarContrasena.setForeground(Color.WHITE);
 
         JPanel formulario = new JPanel();
         formulario.setLayout(new GridLayout(3, 1, 10, 10));
         formulario.add(primeraFila);
         formulario.add(segundaFila);
-        formulario.add(cambiarContraseña);
+        formulario.add(cambiarContrasena);
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
@@ -856,7 +853,7 @@ public class JLogin extends JFrame implements ActionListener {
         return frame;
     }
 
-    JFrame EditUser() {
+    JFrame editUser() {
         String text = "";
         ImageIcon image = new ImageIcon("banner.png");
 
@@ -1102,9 +1099,9 @@ public class JLogin extends JFrame implements ActionListener {
         String pass2 = textfieldPass2.getText();
         String pass3 = (String) this.model.getValueAt(getUserRow(), 3);
         if (pass1.equals(pass3) && !pass2.equals("")) {
-            cambiarContraseña.setEnabled(true);
+            cambiarContrasena.setEnabled(true);
         } else {
-            cambiarContraseña.setEnabled(false);
+            cambiarContrasena.setEnabled(false);
         }
     }
 
