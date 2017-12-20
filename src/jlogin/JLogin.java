@@ -70,9 +70,7 @@ public class JLogin extends JFrame implements ActionListener
      private JPasswordField textfieldPass2;
     private JLabel errorMsgU;
     private JLabel errorMsgP;
-    private JFrame mainWindow;
-    private JFrame addUserWindow;
-    private JFrame editUserWindow;
+    private JFrame mainWindow,addUserWindow,editUserWindow,passEditWindow;
     
     
     private JMenuBar barraMenu;
@@ -297,7 +295,7 @@ public class JLogin extends JFrame implements ActionListener
                                 System.out.println(this.textfieldPass2.getText());
                                 
                                 
-                                mainWindow.dispose();
+                                passEditWindow.dispose();
                                 mainWindow = openWindow();
                                 mainWindow.setVisible(true);
                              }
@@ -446,8 +444,8 @@ public class JLogin extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 mainWindow.dispose();
-                JFrame momi = CambiarPass();
-                momi.setVisible(true);
+                passEditWindow = CambiarPass();
+                passEditWindow.setVisible(true);
             }
         };
         this.cambiarPass.addActionListener(cambiarPass);
