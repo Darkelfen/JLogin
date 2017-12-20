@@ -88,7 +88,7 @@ public class JLogin extends JFrame implements ActionListener
         
         super("Formulario de Inicio de Sesión");
        
-        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setSize(600, 600);
         super.setMinimumSize(new Dimension(400, 400));
         setIconImage(new ImageIcon("icon.png").getImage());
@@ -110,9 +110,6 @@ public class JLogin extends JFrame implements ActionListener
         
         primeraFila.add(labelNombre, BorderLayout.LINE_START);
         primeraFila.add(panelTextFieldNombre, BorderLayout.CENTER);
-        
-       
-        
         
         JPanel userErr = new JPanel(new BorderLayout());
         errorMsgU = new JLabel ("Ingrese usuario");
@@ -136,10 +133,6 @@ public class JLogin extends JFrame implements ActionListener
         
         segundaFila.add(labelContrasena, BorderLayout.LINE_START);
         segundaFila.add(panelTextFieldPass, BorderLayout.CENTER);
-        
-        
-        
-        
         
         JPanel passErr = new JPanel(new BorderLayout());
         errorMsgP = new JLabel ("Ingrese contraseña");
@@ -195,42 +188,45 @@ public class JLogin extends JFrame implements ActionListener
 
         if( e.getSource() == this.iniciarSesion )
         {
-            String user = this.textfieldNombre.getText();
-            String pass = this.textfieldContrasena.getText();
+            boolean usuarioExiste = false;
             usuarioL = this.textfieldNombre.getText();
             passL = this.textfieldContrasena.getText();
             //passL = this.textfieldPass.getText();
-            if ( user.equals("") && pass.equals ("") )
+            if ( usuarioL.equals("") && passL.equals ("") )
             {
                 errorMsgU.setVisible(true);
                 errorMsgP.setVisible(true);
                 textfieldNombre.requestFocus();
             }
             
-            else if ( user.equals("") )
+            else if ( usuarioL.equals("") )
             {
                 errorMsgU.setVisible(true);
                 errorMsgU.setText("Ingrese Usuario");
                 textfieldNombre.requestFocus();
             }
-            else if ( pass.equals ("") )
+            else if ( passL.equals ("") )
             {
                 errorMsgP.setVisible(true);
                 errorMsgP.setText("Ingrese Contraseña");
                 textfieldContrasena.requestFocus();
             }
             
-            if( ( user.equals("admin") && pass.equals("admin") ) || ( user.equals("a") && pass.equals("a") ))
+            for (int i = 0; i< this.usuarios.size(); i++)
             {
-                mainWindow = openWindow();
-                this.dispose();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "Error", "JLogin", JOptionPane.ERROR_MESSAGE);
+                if (this.usuarios.get(i).getUsuario().equals(usuarioL) && this.usuarios.get(i).getPass().equals(passL))
+                {
+                    mainWindow = openWindow();
+                    this.dispose();
+                    usuarioExiste = true;
+                    break;
+                }
             }
             
+            if (!usuarioExiste) 
+                JOptionPane.showMessageDialog(this, "Usuario no registrado", "JLogin", JOptionPane.ERROR_MESSAGE);  
         }
+        
         if( e.getSource() == this.cerrarSesion )
         {
             mainWindow.dispose();
