@@ -293,7 +293,7 @@ public class JLogin extends JFrame implements ActionListener
                                 System.out.println("Contraseña Guardada Corectamente");
                                 U.setPass(this.textfieldPass2.getText());
                                 System.out.println(this.textfieldPass2.getText());
-                                
+                                System.out.println(U.getNombre()+(" ")+U.getUsuario()+(" ")+U.getMail()+(" ")+U.getPass());
                                 
                                 passEditWindow.dispose();
                                 mainWindow = openWindow();
