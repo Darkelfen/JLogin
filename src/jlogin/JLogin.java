@@ -89,9 +89,9 @@ public class JLogin extends JFrame implements ActionListener
         super("Formulario de Inicio de Sesión");
        
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        super.setSize(900, 600);
-        super.setMinimumSize(new Dimension(900, 400));
-
+        super.setSize(600, 600);
+        super.setMinimumSize(new Dimension(400, 400));
+        setIconImage(new ImageIcon("icon.png").getImage());
         ImageIcon image = new ImageIcon("banner.png");
         JLabel banner = new JLabel(image);
         JPanel panelBanner = new JPanel();
@@ -103,9 +103,16 @@ public class JLogin extends JFrame implements ActionListener
         JLabel labelNombre2 = new JLabel("     ");
         labelNombre.setPreferredSize(new Dimension(120, 24));
         this.textfieldNombre = new JTextField();
-        textfieldNombre.setPreferredSize(new Dimension(450, 24));
+        textfieldNombre.setPreferredSize(new Dimension(200, 24));
+        
+         JPanel panelTextFieldNombre = new JPanel();
+         panelTextFieldNombre.add(textfieldNombre);
+        
         primeraFila.add(labelNombre, BorderLayout.LINE_START);
-        primeraFila.add(textfieldNombre, BorderLayout.CENTER);
+        primeraFila.add(panelTextFieldNombre, BorderLayout.CENTER);
+        
+       
+        
         
         JPanel userErr = new JPanel(new BorderLayout());
         errorMsgU = new JLabel ("Ingrese usuario");
@@ -118,11 +125,21 @@ public class JLogin extends JFrame implements ActionListener
 
         JPanel segundaFila = new JPanel(new BorderLayout());
         JLabel labelContrasena = new JLabel("Contraseña");
-        labelContrasena.setPreferredSize(new Dimension(100, 24));
+        labelContrasena.setPreferredSize(new Dimension(120, 24));
         this.textfieldContrasena = new JPasswordField();
-        textfieldContrasena.setPreferredSize(new Dimension(300, 24));
+        textfieldContrasena.setPreferredSize(new Dimension(200, 24));
+        
+        
+        JPanel panelTextFieldPass = new JPanel();
+        panelTextFieldPass.add(textfieldContrasena);
+        
+        
         segundaFila.add(labelContrasena, BorderLayout.LINE_START);
-        segundaFila.add(textfieldContrasena, BorderLayout.CENTER);
+        segundaFila.add(panelTextFieldPass, BorderLayout.CENTER);
+        
+        
+        
+        
         
         JPanel passErr = new JPanel(new BorderLayout());
         errorMsgP = new JLabel ("Ingrese contraseña");
@@ -134,26 +151,29 @@ public class JLogin extends JFrame implements ActionListener
         passErr.add(errorMsgP, BorderLayout.CENTER);
         
         JPanel leyenda = new JPanel(new BorderLayout());
-       
+        
         JLabel legend = new JLabel("Ingenieria En Desarrollo de Videojuegos y Realidad Virtual");
-        JLabel legend2 = new JLabel("                                           ");
+        //JLabel legend2 = new JLabel("                                           ");
         legend.setPreferredSize(new Dimension (100,24));
         legend.setForeground(Color.GRAY);
-        leyenda.add(legend2,BorderLayout.LINE_START);
+        //leyenda.add(legend2,BorderLayout.LINE_START);
         leyenda.add(legend,BorderLayout.CENTER);
         
         this.iniciarSesion = new JButton("Iniciar sesión");
         iniciarSesion.addActionListener(this);
         iniciarSesion.setBackground(Color.BLUE);
         iniciarSesion.setForeground(Color.WHITE);
-      
+        iniciarSesion.setPreferredSize(new Dimension(200,24));
+        JPanel panelIniciarSesion = new JPanel();
+        panelIniciarSesion.add(iniciarSesion);
+        
         JPanel formulario = new JPanel();
-        formulario.setLayout(new GridLayout(6, 1, 10, 10));
+        formulario.setLayout(new GridLayout(6, 1, 5, 5));
         formulario.add(primeraFila);
         formulario.add(userErr);
         formulario.add(segundaFila);
         formulario.add(passErr);
-        formulario.add(iniciarSesion);
+        formulario.add(panelIniciarSesion);
         formulario.add(leyenda);
         
         JPanel centro = new JPanel();
@@ -345,7 +365,7 @@ public class JLogin extends JFrame implements ActionListener
         this.barraMenu.add(this.menuAyuda);
             this.menuAyuda.add(this.equipoDesarrollo);
         
-        this.setJMenuBar(this.barraMenu);
+        setJMenuBar(this.barraMenu);
          
         this.programaEventos();
         
@@ -353,23 +373,47 @@ public class JLogin extends JFrame implements ActionListener
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 600);
+        frame.add(barraMenu,BorderLayout.PAGE_START);
         JLabel banner = new JLabel(image);
         JPanel upperPanel = new JPanel (new BorderLayout());
         JPanel upperPanel2 = new JPanel (new BorderLayout());
         JPanel upperPanel3 = new JPanel (new BorderLayout());
-        upperPanel.setLayout(new GridLayout(2, 1, 0, 0));
-        upperPanel2.add(barraMenu,BorderLayout.PAGE_START);
+        upperPanel.setLayout(new GridLayout(1, 1, 0, 0));
+        
         upperPanel3.add(banner);
-        upperPanel.add(upperPanel2,BorderLayout.PAGE_START);
+        
         upperPanel.add(upperPanel3);
-        frame.add(upperPanel,BorderLayout.NORTH);
+        
         upperPanel3.setBackground( new Color(190, 11, 103) );
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 4, 10, 10));
-        buttonPanel.add(cerrarSesion);
-        buttonPanel.add(eliminarUsuario);
-        buttonPanel.add(editarUsuario);
-        buttonPanel.add(agregarUsuario);
+        buttonPanel.setLayout(new GridLayout(1, 2, 0, 0));
+        
+        cerrarSesion.setPreferredSize(new Dimension(100,24));
+        JPanel cerrarSesionPanel = new JPanel();
+        cerrarSesionPanel.add(cerrarSesion);
+        
+        eliminarUsuario.setPreferredSize(new Dimension(100,24));
+        JPanel eliminarUsuarioPanel = new JPanel();
+        eliminarUsuarioPanel.add(eliminarUsuario);
+        
+        editarUsuario.setPreferredSize(new Dimension(100,24));
+        JPanel editarUsuarioPanel = new JPanel();
+       
+        
+        editarUsuarioPanel.add(eliminarUsuario);
+        
+        agregarUsuario.setPreferredSize(new Dimension(100,24));
+        JPanel agregarUsuarioPanel = new JPanel();
+        agregarUsuarioPanel.add(cerrarSesion);
+        agregarUsuarioPanel.add(eliminarUsuario);
+        agregarUsuarioPanel.add(editarUsuario);
+        agregarUsuarioPanel.add(agregarUsuario);
+        
+        buttonPanel.setBorder(new EmptyBorder(0, -850, 0, -10));
+        buttonPanel.add(cerrarSesionPanel);
+        buttonPanel.add(eliminarUsuarioPanel);
+        buttonPanel.add(editarUsuarioPanel);
+        buttonPanel.add(agregarUsuarioPanel);
 
         // tablemodel
         model = new DefaultTableModel(new String[] {"Usuario", "Nombre", "Email", "Contraseña"}, 0)
@@ -405,11 +449,16 @@ public class JLogin extends JFrame implements ActionListener
         }
         });
         
+        table.setPreferredSize(new Dimension(600,300));
+        JPanel panelScrollPane = new JPanel();
+        panelScrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.CENTER);
-        frame.add(buttonPanel,BorderLayout.SOUTH);
+        panelScrollPane.add(scrollPane);
+        frame.add(panelScrollPane, BorderLayout.CENTER);
+        frame.add(buttonPanel,BorderLayout.AFTER_LAST_LINE);
         frame.setVisible(true);
         loadUsuarios();
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
         return (frame);
     }
     
@@ -511,7 +560,7 @@ public class JLogin extends JFrame implements ActionListener
         formulario.add(labelD2);
         
         frame.add(formulario,BorderLayout.CENTER);
-        
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
         return (frame);
     }
      JFrame AddUser()
@@ -643,7 +692,7 @@ public class JLogin extends JFrame implements ActionListener
         centro.add(formulario);
         
         frame.add(centro);
-                 
+        frame.setIconImage(new ImageIcon("icon.png").getImage());        
         return frame;
      }
      
@@ -750,7 +799,7 @@ public class JLogin extends JFrame implements ActionListener
         
         frame.add(centro);
         frame.add(panelVolver,BorderLayout.SOUTH);
-       
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
         
         
         return frame;
@@ -829,7 +878,7 @@ public class JLogin extends JFrame implements ActionListener
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
-
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
         frame.add(centro);
 
         return frame;
@@ -971,7 +1020,7 @@ public class JLogin extends JFrame implements ActionListener
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
-        
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
         frame.add(centro);
         
         return frame;
