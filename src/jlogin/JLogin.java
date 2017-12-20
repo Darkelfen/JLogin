@@ -70,7 +70,7 @@ public class JLogin extends JFrame implements ActionListener
      private JPasswordField textfieldPass2;
     private JLabel errorMsgU;
     private JLabel errorMsgP;
-    private JFrame mainWindow,addUserWindow,editUserWindow,passEditWindow;
+    private JFrame mainWindow,addUserWindow,editUserWindow,passEditWindow,infoWindow;
     
     
     private JMenuBar barraMenu;
@@ -222,7 +222,7 @@ public class JLogin extends JFrame implements ActionListener
         }
         if( e.getSource() == this.volver )
         {
-            mainWindow.dispose();
+            infoWindow.dispose();
             mainWindow = openWindow();
             mainWindow.setVisible(true);
         }
@@ -434,8 +434,8 @@ public class JLogin extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 mainWindow.dispose();
-                JFrame memi = MostrarInfo();
-                memi.setVisible(true);
+                infoWindow = MostrarInfo();
+                infoWindow.setVisible(true);
             }
         };
         this.infoUsuario.addActionListener(infoUsuario);
@@ -812,14 +812,9 @@ public class JLogin extends JFrame implements ActionListener
         JPanel centro = new JPanel();
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
-        
-        
-        
-        
+
         frame.add(centro);
-        
-        
-        
+
         return frame;
      }
      JFrame EditUser()
