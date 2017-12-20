@@ -630,7 +630,7 @@ public class JLogin extends JFrame implements ActionListener
         User.add(labelUser, BorderLayout.LINE_START);
         labelUser1.setPreferredSize(new Dimension(120, 24));
         User1.add(labelUser1, BorderLayout.LINE_START);
-        
+        labelUser1.setForeground(Color.red);
         
         JPanel Nombre = new JPanel(new BorderLayout());
         JLabel labelNombre = new JLabel("Nombre Real : ");
@@ -643,7 +643,8 @@ public class JLogin extends JFrame implements ActionListener
         
          labelNombre1.setPreferredSize(new Dimension(120, 24));
         Nombre1.add(labelNombre1, BorderLayout.LINE_START);
-
+        labelNombre1.setForeground(Color.red);
+        
         JPanel email = new JPanel(new BorderLayout());
         JLabel labelEmail = new JLabel("Email : ");
         
@@ -655,17 +656,20 @@ public class JLogin extends JFrame implements ActionListener
         
         labelEmail1.setPreferredSize(new Dimension(120, 10));
         email1.add(labelEmail1, BorderLayout.LINE_START);
-
+        labelEmail1.setForeground(Color.red);
+        
         JPanel Pass = new JPanel(new BorderLayout());
         JLabel labelPass = new JLabel("Contraseña : ");
         labelPass.setPreferredSize(new Dimension(100, 2));
         Pass.add(labelPass, BorderLayout.LINE_START);
         
+        
         JPanel Pass1 = new JPanel(new BorderLayout());
         JLabel labelPass1 = new JLabel();
         labelPass1.setPreferredSize(new Dimension(100, 2));
         Pass1.add(labelPass1, BorderLayout.LINE_START);
-
+        labelPass1.setForeground(Color.red);
+        
         
          for(Usuario U: usuarios)
               {
