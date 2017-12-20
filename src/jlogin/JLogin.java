@@ -73,6 +73,8 @@ public class JLogin extends JFrame implements ActionListener
     private JFrame mainWindow;
     private JFrame addUserWindow;
     private JFrame editUserWindow;
+    
+    
     private JMenuBar barraMenu;
     private JMenu menuArchivo,menuAyuda;
     private JMenuItem infoUsuario,cambiarPass,salir,equipoDesarrollo;
@@ -175,7 +177,7 @@ public class JLogin extends JFrame implements ActionListener
             String user = this.textfieldNombre.getText();
             String pass = this.textfieldContrasena.getText();
             usuarioL = this.textfieldNombre.getText();
-            passL = Arrays.toString(this.textfieldContrasena.getPassword());
+            passL = this.textfieldContrasena.getText();
             //passL = this.textfieldPass.getText();
             if ( user.equals("") && pass.equals ("") )
             {
@@ -264,7 +266,53 @@ public class JLogin extends JFrame implements ActionListener
         }
         if (e.getSource() == this.cambiarContraseña)
         {
-              
+              for(Usuario U: usuarios)
+              {
+                 if(usuarioL.equals(((Usuario)U).getUsuario()))
+                 {
+                     System.out.println("Usuario Encontrado");
+                     System.out.println(passL);
+                     System.out.println(((Usuario)U).getPass());
+                     if(passL.equals(((Usuario)U).getPass()))
+                     {
+                         System.out.println("Contraseña correcta");
+                         if(Arrays.toString(this.textfieldPass2.getPassword()).equals(""))
+                         {
+                             System.out.println("No se puede guardar");
+                         }
+                         else
+                         {
+                             try
+                             {
+                                 //AGREGAR GUARDADO PERMANENTE Y QUE SE CAMBIE EN LA TABLA
+                                 //ARREGLAR DISPOSE
+                                System.out.println("Contraseña Guardada Corectamente");
+                                U.setPass(this.textfieldPass2.getText());
+                                System.out.println(this.textfieldPass2.getText());
+                                
+                                
+                                mainWindow.dispose();
+                                mainWindow = openWindow();
+                                mainWindow.setVisible(true);
+                             }
+                             catch(Exception er)
+                             {
+                                 System.out.println("Error");
+                             }
+                             
+                         }
+                     }
+                     else
+                     {
+                         System.out.println("Contraseña incorrecta");
+                     }
+                     
+                 }
+                 else
+                 {
+                     System.out.println("Usuario No Encontrado");
+                 }
+              }
         }
         
     }
@@ -747,7 +795,7 @@ public class JLogin extends JFrame implements ActionListener
         segundaFila.add(labelContrasena2, BorderLayout.LINE_START);
         segundaFila.add(textfieldPass2, BorderLayout.CENTER);
         
-        JButton cambiarContraseña = new JButton("Cambiar Contraseña");
+        this.cambiarContraseña = new JButton("Cambiar Contraseña");
         cambiarContraseña.addActionListener(this);
         cambiarContraseña.setBackground(Color.BLUE);
         cambiarContraseña.setForeground(Color.WHITE);
@@ -761,26 +809,7 @@ public class JLogin extends JFrame implements ActionListener
         centro.setBorder(new EmptyBorder(20, 20, 20, 20));
         centro.add(formulario);
         
-        for(Usuario U: usuarios)
-              {
-                 if(usuarioL.equals(((Usuario)U).getUsuario()))
-                 {
-                     System.out.println("Usuario Encontrado");
-                     if(Arrays.toString(this.textfieldPass1.getPassword()).equals(((Usuario)U).getPass()))
-                     {
-                         System.out.println("Contraseña correcta");
-                         if(Arrays.toString(this.textfieldPass2.getPassword()).equals(""))
-                         {
-                             System.out.println("No se puede guardar");
-                         }
-                         else
-                         {
-                             U.setPass(Arrays.toString(this.textfieldPass2.getPassword()));
-                         }
-                     }
-                     
-                 }
-              }
+        
         
         
         frame.add(centro);
