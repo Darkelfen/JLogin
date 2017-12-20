@@ -230,12 +230,12 @@ public class JLogin extends JFrame implements ActionListener
             {
                 String user = textfieldUser.getText();
                 String nombre = textfieldNombreReal.getText();
-                String pass = textfieldPass.getText();
                 String email = textfieldEmail.getText();
+                String pass = textfieldPass.getText();
                 model.setValueAt(user,currentRow,0);
                 model.setValueAt(nombre,currentRow,1);
-                model.setValueAt(pass,currentRow,2);
-                model.setValueAt(email,currentRow,3);
+                model.setValueAt(email,currentRow,2);
+                model.setValueAt(pass,currentRow,3);
                 System.out.println("Participante editado correctamente.");
             } 
             catch (Exception er)
