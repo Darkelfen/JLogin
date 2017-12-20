@@ -222,6 +222,12 @@ public class JLogin extends JFrame implements ActionListener
             mainWindow = openWindow();
             mainWindow.setVisible(true);
         }
+        if( e.getSource() == this.volver )
+        {
+            mainWindow.dispose();
+            mainWindow = openWindow();
+            mainWindow.setVisible(true);
+        }
         if( e.getSource() == this.editarUsuario )
         {
 
@@ -737,7 +743,7 @@ public class JLogin extends JFrame implements ActionListener
         
         JPanel panelVolver = new JPanel();
         
-        JButton volver = new JButton("Volver");
+        this.volver = new JButton("Volver");
         volver.addActionListener(this);
         volver.setBackground(Color.BLUE);
         volver.setForeground(Color.WHITE);
